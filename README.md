@@ -1,6 +1,7 @@
 # Minecraft-3D-CE
 Here be dragons!
 
+![Image](https://github.com/user-attachments/assets/3f100e66-7e77-4add-9a55-d7aa08b6c499)
 
 Features: 
 - Generation using noise. 0 returns superflat, the input is broken though. That will be fixed later.
