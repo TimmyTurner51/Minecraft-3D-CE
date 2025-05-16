@@ -1,0 +1,151 @@
+Section          Base   Top    High   Length
+---------------- ------ ------ ------ -------
+.icon            D1A882 D1A9AD           12Bh
+.init.libs       D1A9AD D1AA05            58h
+.libs            D1AA05 D1AA78            73h
+.init.clock      D1AA78 D1AA78             0h
+.init.reruncheck D1AA78 D1AA78             0h
+.init            D1AA78 D1AAA4            2Ch
+.fini            D1AAA4 D1AAD8            34h
+.text            D1AAD8 D1E1D7          36FFh
+.data            D1E1D7 D1E1E9            12h
+.rodata          D1E1E9 D1E2BC            D3h
+.init_array      000000 000000             0h
+.ctors           000000 000000             0h
+.dtors           000000 000000             0h
+.fini_array      000000 000000             0h
+.bss             D052C6 D0D32D D13FD8   8067h
+.header          D1A87F D1A882             3h
+
+Label                                  Value
+------------------------------------   ------
+___low_bss                           = D052C6
+___len_bss                           = 008067
+___heaptop                           = D13FD8
+___heapbot                           = D0D32D
+___libs                              = D1AA05
+___init_array_count                  = 000000
+___ctors_count                       = 000000
+___dtors_count                       = 000000
+___fini_array_count                  = 000000
+__stack                              = D1A87E
+__fneg                               = D1AAD8
+__frameset                           = D1AAE5
+__frameset0                          = D1AAF3
+__idivs                              = D1AAFE
+__idivu                              = D1AB05
+__idvrms                             = D1AB0D
+__idvrmu                             = D1AB3B
+__imulu                              = D1AB53
+__ineg                               = D1AB83
+__ishl                               = D1AB8C
+__ishru                              = D1ABB2
+__ladd                               = D1ABF3
+__lcmpu                              = D1ABF9
+__lcmpzero                           = D1AC01
+__fadd                               = 000270
+__fcmp                               = 000274
+__fdiv                               = 000278
+__fmul                               = 000288
+__fsub                               = 000290
+__ftol                               = 00027C
+__ftoul                              = 00027C
+__ltof                               = 000284
+__setflag                            = 000218
+__ultof                              = 000280
+__sand                               = D1AC0C
+__ixor                               = D1AC15
+_os_DisableHomeTextBuffer            = D1AC2C
+_os_EnableHomeTextBuffer             = D1AC3E
+_fmaxf                               = D1AC50
+_fminf                               = D1ACBE
+_cosf                                = 02211C
+__isnanf                             = D1AD28
+_sinf                                = 022118
+_sqrtf                               = 000298
+_tanf                                = 022120
+.missingappvar                       = D1E1E9
+.libloadname                         = D1E1EE
+.libloadnamelen                      = 000007
+.webaddress                          = D1E1F6
+__start                              = D1AA78
+___exithl                            = D1AAA4
+skip._exit                           = D1AAA4
+skip.__Exit                          = D1AAA4
+skip._abort                          = D1AAA4
+_exit.sp                             = D1AAA5
+_exit.flash_wait_states              = D1AAAF
+_main                                = D1AD42
+_valueNoise2D                        = D1B010
+_smoothNoise2D                       = D1B090
+_interpolatedNoise                   = D1B1DA
+_fbmNoise2D                          = D1B314
+_updatePlayerFOV                     = D1B41A
+_initPlayer                          = D1B471
+_setCameraSpawnAboveTerrain          = D1B479
+_updatePlayer                        = D1B519
+_updateTransformCache                = D1B8A4
+_transform                           = D1B917
+_cubeInView                          = D1BAF1
+_drawCubeFace                        = D1BD23
+JTI12_0                              = D1E20B
+_drawSkybox                          = D1D02B
+_updateCursorTarget                  = D1D093
+_drawWorld                           = D1D512
+_load_texture_appvar                 = D1D9D8
+_initWorld                           = D1DAA0
+_generateFaceVisibility              = D1DDD5
+_.str                                = D1E21D
+_cameraFOVDegrees                    = D1E1D7
+_cursorBlockValid                    = D052C6
+_closestCursorDot                    = D1E1DB
+_rotX                                = D052C7
+_sinRotX                             = D052CB
+_cosRotX                             = D052CF
+_rotY                                = D052D3
+_sinRotY                             = D052D7
+_cosRotY                             = D052DB
+_camX                                = D052DF
+_camY                                = D052E3
+_camZ                                = D1E1DF
+_playerFOV                           = D052E7
+___const.drawCubeFace.indices        = D1E229
+_cursorBlockX                        = D052EB
+_cursorBlockY                        = D052EE
+_cursorBlockZ                        = D052F1
+_renderDistance                      = D1E1E3
+_updateCursorTarget.cursorMissFrames = D052F4
+_.str.11                             = D1E271
+_drawWorld.lastTime                  = D052F7
+_drawWorld.frameCounter              = D052FB
+_drawWorld.fps                       = D052FC
+_.str.1                              = D1E278
+_.str.16                             = D1E27D
+_.str.1.17                           = D1E288
+_texture_colors                      = D052FD
+_worldSeed                           = D1E1E6
+_world                               = D0532D
+_.str.27                             = D1E28A
+_.str.1.26                           = D1E29E
+_anyFaceVisible                      = D0632D
+_faceVisible                         = D0732D
+lib.LibLoad                          = D1AA05
+_#ti_Open                            = D1AA19
+_#ti_Close                           = D1AA1D
+_#ti_GetC                            = D1AA21
+_#ti_Seek                            = D1AA25
+_#gfx_Begin                          = D1AA32
+_#gfx_End                            = D1AA36
+_#gfx_SetColor                       = D1AA3A
+_#gfx_FillScreen                     = D1AA3E
+_#gfx_SetDraw                        = D1AA42
+_#gfx_SwapDraw                       = D1AA46
+_#gfx_PrintInt                       = D1AA4A
+_#gfx_PrintUInt                      = D1AA4E
+_#gfx_PrintString                    = D1AA52
+_#gfx_SetTextXY                      = D1AA56
+_#gfx_SetTextFGColor                 = D1AA5A
+_#gfx_GetStringWidth                 = D1AA5E
+_#gfx_FillRectangle                  = D1AA62
+_#gfx_FillTriangle                   = D1AA66
+_#kb_Scan                            = D1AA74

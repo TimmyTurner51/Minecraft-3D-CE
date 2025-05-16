@@ -1,0 +1,5891 @@
+	section	.text,"ax",@progbits
+	assume	adl = 1
+	section	.text,"ax",@progbits
+	public	_main
+_main:
+	ld	hl, -23
+	call	__frameset
+	call	_gfx_Begin
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	call	_gfx_SetDraw
+	pop	hl
+	call	_load_texture_appvar
+	bit	0, a
+	jp	z, BB0_27
+	lea	hl, ix - 10
+	ld	(ix - 10), 0
+	push	hl
+	pop	iy
+	inc	iy
+	ld	bc, 9
+	lea	de, iy
+	ld	(ix - 19), hl
+	ldir
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	call	_gfx_FillScreen
+	pop	hl
+	ld	hl, -2
+	push	hl
+	call	_gfx_SetTextFGColor
+	pop	hl
+	ld	hl, 50
+	push	hl
+	ld	hl, 10
+	push	hl
+	call	_gfx_SetTextXY
+	pop	hl
+	pop	hl
+	ld	hl, _.str
+	push	hl
+	call	_gfx_PrintString
+	pop	hl
+	ld	hl, 70
+	push	hl
+	ld	hl, 10
+	push	hl
+	call	_gfx_SetTextXY
+	pop	hl
+	pop	hl
+	ld	hl, 10
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	call	_gfx_PrintUInt
+	pop	hl
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	ld	(ix - 13), hl
+	ld	(ix - 16), hl
+BB0_2:
+	call	_kb_Scan
+	ld	iy, -720868
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ld	a, l
+	bit	6, a
+	lea	hl, iy
+	jp	nz, BB0_28
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld.sis	bc, 1
+	call	__sand
+	bit	0, l
+	jp	nz, BB0_24
+	ld	hl, -720878
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	5, a
+	jp	nz, BB0_24
+	ld	e, 0
+	ld	(ix - 23), e
+	or	a, a
+	sbc	hl, hl
+BB0_6:
+	push	hl
+	pop	de
+	ld	bc, 10
+	or	a, a
+	sbc	hl, bc
+	jr	z, BB0_12
+	push	de
+	pop	iy
+	ld	bc, 769
+	add	iy, bc
+	lea	hl, iy
+	ld	c, 8
+	call	__ishru
+	ld	c, 1
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	hl, -720880
+	add	hl, bc
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	(ix - 22), iy
+	ld	a, iyl
+	and	a, l
+	or	a, a
+	jr	z, BB0_11
+	push	de
+	pop	bc
+	ld	hl, (ix - 19)
+	add	hl, bc
+	bit	0, (hl)
+	push	de
+	pop	iy
+	jr	nz, BB0_11
+	ld	de, (ix - 16)
+	push	de
+	pop	hl
+	ld	bc, 10
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	p, BB0_11
+	ld	hl, (ix - 13)
+	ld	bc, 10
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	inc	de
+	ld	(ix - 16), de
+	ld	(ix - 13), iy
+	ld	e, 1
+	ld	(ix - 23), e
+BB0_11:
+	ld	hl, (ix - 22)
+	ld	bc, -768
+	add	hl, bc
+	jr	BB0_6
+BB0_12:
+	ld	hl, -720878
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	7, a
+	ld	de, (ix - 16)
+	jr	z, BB0_16
+	push	de
+	pop	hl
+	ld	bc, 1
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	m, BB0_16
+BB0_14:
+	ld	hl, -720878
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	7, a
+	jr	z, BB0_17
+	call	_kb_Scan
+	ld	de, (ix - 16)
+	jr	BB0_14
+BB0_16:
+	ld	a, (ix - 23)
+	and	a, 1
+	bit	0, a
+	jr	nz, BB0_18
+	jr	BB0_19
+BB0_17:
+	ld	hl, (ix - 13)
+	ld	bc, 10
+	call	__idivu
+	ld	(ix - 13), hl
+	dec	de
+BB0_18:
+	ld	(ix - 16), de
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	call	_gfx_FillScreen
+	pop	hl
+	ld	hl, -2
+	push	hl
+	call	_gfx_SetTextFGColor
+	pop	hl
+	ld	hl, 50
+	push	hl
+	ld	hl, 10
+	push	hl
+	call	_gfx_SetTextXY
+	pop	hl
+	pop	hl
+	ld	hl, _.str
+	push	hl
+	call	_gfx_PrintString
+	pop	hl
+	ld	hl, 70
+	push	hl
+	ld	hl, 10
+	push	hl
+	call	_gfx_SetTextXY
+	pop	hl
+	pop	hl
+	ld	hl, 10
+	push	hl
+	ld	hl, (ix - 13)
+	push	hl
+	call	_gfx_PrintUInt
+	ld	de, (ix - 16)
+	pop	hl
+	pop	hl
+BB0_19:
+	ld	(ix - 16), de
+	ld	de, 0
+BB0_20:
+	push	de
+	pop	hl
+	ld	bc, 10
+	or	a, a
+	sbc	hl, bc
+	jp	z, BB0_2
+	push	de
+	pop	iy
+	ld	bc, 769
+	add	iy, bc
+	lea	hl, iy
+	ld	c, 8
+	call	__ishru
+	ld	c, 1
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	hl, -720880
+	add	hl, bc
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, iyl
+	and	a, l
+	ld	hl, (ix - 19)
+	add	hl, de
+	or	a, a
+	ld	a, 1
+	jr	nz, BB0_23
+	ld	a, 0
+BB0_23:
+	ld	(hl), a
+	ld	de, -768
+	add	iy, de
+	lea	de, iy
+	jr	BB0_20
+BB0_24:
+	ld	hl, 1
+	push	hl
+	call	_gfx_SetDraw
+	pop	hl
+	ld	hl, (ix - 13)
+	push	hl
+	call	_initWorld
+	pop	hl
+	call	_initPlayer
+	ld	de, -1
+	ld	hl, 1
+BB0_25:
+	ld	(ix - 16), hl
+	ld	bc, 3
+	call	__idivu
+	call	__imulu
+	push	hl
+	pop	bc
+	ld	(ix - 13), de
+	ex	de, hl
+	add	hl, bc
+	ld	(ix - 19), hl
+	call	_kb_Scan
+	ld	hl, -720868
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	6, a
+	jr	nz, BB0_27
+	call	_updatePlayer
+	ld	hl, (ix - 19)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	call	z, _updateCursorTarget
+	call	_drawSkybox
+	call	_drawWorld
+	call	_gfx_SwapDraw
+	ld	de, (ix - 13)
+	dec	de
+	ld	hl, (ix - 16)
+	inc	hl
+	jr	BB0_25
+BB0_27:
+	call	_gfx_End
+BB0_28:
+	or	a, a
+	sbc	hl, hl
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_valueNoise2D
+_valueNoise2D:
+	call	__frameset0
+	ld	de, (ix + 6)
+	ld	hl, (ix + 9)
+	ld	bc, 57
+	ld	a, 82
+	call	__imulu
+	push	hl
+	pop	iy
+	add	iy, de
+	ld	c, 13
+	lea	hl, iy
+	call	__ishl
+	lea	bc, iy
+	call	__ixor
+	push	hl
+	pop	iy
+	ld	bc, 15731
+	call	__imulu
+	lea	bc, iy
+	call	__imulu
+	ld	de, 789221
+	add	hl, de
+	call	__imulu
+	push	hl
+	pop	bc
+	push	bc
+	pop	iy
+	add	iy, iy
+	sbc	hl, hl
+	push	hl
+	pop	de
+	push	bc
+	pop	hl
+	ld	bc, 580877
+	call	__ladd
+	push	hl
+	pop	bc
+	ld	a, e
+	call	__ltof
+	ld	iy, -8388608
+	lea	hl, iy
+	ld	e, 48
+	call	__fmul
+	push	bc
+	pop	hl
+	ld	e, a
+	lea	bc, iy
+	ld	a, 63
+	call	__fsub
+	push	bc
+	pop	hl
+	ld	e, a
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_smoothNoise2D
+_smoothNoise2D:
+	ld	hl, -17
+	call	__frameset
+	ld	hl, (ix + 6)
+	ld	de, (ix + 9)
+	dec	hl
+	ld	(ix - 9), hl
+	dec	de
+	ld	(ix - 3), de
+	push	de
+	push	hl
+	call	_valueNoise2D
+	ld	(ix - 6), hl
+	ld	(ix - 15), e
+	pop	hl
+	pop	hl
+	ld	hl, (ix + 6)
+	ex	de, hl
+	inc	de
+	ld	(ix - 12), de
+	ld	hl, (ix - 3)
+	push	hl
+	push	de
+	call	_valueNoise2D
+	pop	bc
+	pop	bc
+	ld	bc, (ix - 6)
+	ld	a, (ix - 15)
+	call	__fadd
+	ld	(ix - 15), bc
+	ld	(ix - 16), a
+	ld	hl, (ix + 9)
+	inc	hl
+	ld	(ix - 6), hl
+	push	hl
+	ld	hl, (ix - 9)
+	push	hl
+	call	_valueNoise2D
+	pop	bc
+	pop	bc
+	ld	bc, (ix - 15)
+	ld	a, (ix - 16)
+	call	__fadd
+	ld	(ix - 15), bc
+	ld	(ix - 16), a
+	ld	hl, (ix - 6)
+	push	hl
+	ld	hl, (ix - 12)
+	push	hl
+	call	_valueNoise2D
+	pop	bc
+	pop	bc
+	ld	bc, (ix - 15)
+	ld	a, (ix - 16)
+	call	__fadd
+	ld	hl, -8388608
+	ld	e, 61
+	call	__fmul
+	ld	(ix - 15), bc
+	ld	(ix - 16), a
+	ld	hl, (ix + 9)
+	push	hl
+	ld	hl, (ix - 9)
+	push	hl
+	call	_valueNoise2D
+	ld	(ix - 9), hl
+	ld	(ix - 17), e
+	pop	hl
+	pop	hl
+	ld	hl, (ix + 9)
+	push	hl
+	ld	hl, (ix - 12)
+	push	hl
+	call	_valueNoise2D
+	pop	bc
+	pop	bc
+	ld	bc, (ix - 9)
+	ld	a, (ix - 17)
+	call	__fadd
+	ld	(ix - 9), bc
+	ld	(ix - 12), a
+	ld	hl, (ix - 3)
+	push	hl
+	ld	hl, (ix + 6)
+	push	hl
+	call	_valueNoise2D
+	pop	bc
+	pop	bc
+	ld	bc, (ix - 9)
+	ld	a, (ix - 12)
+	call	__fadd
+	ld	(ix - 3), bc
+	ld	(ix - 9), a
+	ld	hl, (ix - 6)
+	push	hl
+	ld	hl, (ix + 6)
+	push	hl
+	call	_valueNoise2D
+	pop	bc
+	pop	bc
+	ld	bc, (ix - 3)
+	ld	a, (ix - 9)
+	call	__fadd
+	or	a, a
+	sbc	hl, hl
+	ld	e, 62
+	call	__fmul
+	ld	(ix - 3), bc
+	ld	(ix - 6), a
+	ld	hl, (ix + 9)
+	push	hl
+	ld	hl, (ix + 6)
+	push	hl
+	call	_valueNoise2D
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	ld	hl, -8388608
+	ld	e, 62
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 15)
+	ld	a, (ix - 16)
+	ld	hl, (ix - 3)
+	ld	e, (ix - 6)
+	call	__fadd
+	push	bc
+	pop	hl
+	ld	e, a
+	lea	bc, iy
+	ld	a, d
+	call	__fadd
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_interpolatedNoise
+_interpolatedNoise:
+	ld	hl, -26
+	call	__frameset
+	ld	bc, (ix + 6)
+	ld	iy, (ix + 12)
+	ld	d, (ix + 15)
+	ld	a, (ix + 9)
+	call	__ftol
+	push	bc
+	pop	hl
+	lea	bc, iy
+	ld	a, d
+	call	__ftol
+	ld	(ix - 3), bc
+	push	hl
+	pop	bc
+	ld	(ix - 6), bc
+	push	bc
+	pop	iy
+	add	iy, iy
+	sbc	hl, hl
+	ld	a, l
+	call	__ltof
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, (ix + 6)
+	ld	a, (ix + 9)
+	call	__fsub
+	ld	(ix - 9), bc
+	ld	(ix - 10), a
+	ld	bc, (ix - 3)
+	push	bc
+	pop	hl
+	push	bc
+	pop	iy
+	add	iy, iy
+	sbc	hl, hl
+	ld	a, l
+	call	__ltof
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, (ix + 12)
+	ld	a, d
+	call	__fsub
+	ld	(ix - 18), bc
+	ld	(ix - 19), a
+	ld	hl, (ix - 3)
+	push	hl
+	ld	hl, (ix - 6)
+	push	hl
+	call	_smoothNoise2D
+	ld	(ix - 14), hl
+	ld	(ix - 15), e
+	pop	hl
+	pop	hl
+	ld	de, (ix - 6)
+	inc	de
+	ld	(ix - 22), de
+	ld	hl, (ix - 3)
+	push	hl
+	push	de
+	call	_smoothNoise2D
+	ld	(ix - 25), hl
+	ld	(ix - 26), e
+	pop	hl
+	pop	hl
+	ld	hl, (ix - 3)
+	inc	hl
+	ld	(ix - 3), hl
+	push	hl
+	ld	hl, (ix - 6)
+	push	hl
+	call	_smoothNoise2D
+	ld	(ix - 6), hl
+	ld	(ix - 11), e
+	pop	hl
+	pop	hl
+	ld	hl, (ix - 3)
+	push	hl
+	ld	hl, (ix - 22)
+	push	hl
+	call	_smoothNoise2D
+	ld	(ix - 3), hl
+	ld	(ix - 22), e
+	pop	hl
+	pop	hl
+	ld	bc, (ix - 25)
+	ld	a, (ix - 26)
+	ld	hl, (ix - 14)
+	ld	e, (ix - 15)
+	call	__fsub
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, (ix - 9)
+	ld	a, (ix - 10)
+	call	__fmul
+	ld	hl, (ix - 14)
+	ld	e, (ix - 15)
+	call	__fadd
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 3)
+	ld	a, (ix - 22)
+	ld	hl, (ix - 6)
+	ld	e, (ix - 11)
+	call	__fsub
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, (ix - 9)
+	ld	a, (ix - 10)
+	call	__fmul
+	ld	hl, (ix - 6)
+	ld	e, (ix - 11)
+	call	__fadd
+	lea	hl, iy
+	ld	e, d
+	call	__fsub
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, (ix - 18)
+	ld	a, (ix - 19)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_fbmNoise2D
+_fbmNoise2D:
+	ld	hl, -22
+	call	__frameset
+	ld	iy, (ix + 18)
+	ld	bc, 0
+	xor	a, a
+	ld	de, 1
+	lea	hl, iy
+	sbc	hl, de
+	call	pe, __setflag
+	jp	p, BB4_2
+	push	bc
+	pop	iy
+BB4_2:
+	ld	l, 63
+	ld	(ix - 4), bc
+	ld	bc, -8388608
+	ld	de, -8388608
+	ld	(ix - 12), de
+	ld	(ix - 1), l
+	ld	(ix - 13), l
+	or	a, a
+	sbc	hl, hl
+	ld	(ix - 7), hl
+	ld	(ix - 8), a
+BB4_3:
+	lea	hl, iy
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	jp	z, BB4_5
+	ld	(ix - 16), bc
+	ld	(ix - 9), a
+	ld	a, (ix - 1)
+	ld	hl, (ix + 6)
+	ld	e, (ix + 9)
+	call	__fmul
+	ld	(ix - 22), bc
+	ld	(ix - 19), iy
+	ld	iyl, a
+	ld	bc, (ix - 16)
+	ld	a, (ix - 1)
+	ld	hl, (ix + 12)
+	ld	e, (ix + 15)
+	call	__fmul
+	ld	l, a
+	push	hl
+	push	bc
+	push	iy
+	ld	hl, (ix - 22)
+	push	hl
+	call	_interpolatedNoise
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	iy, (ix - 12)
+	lea	hl, iy
+	ld	d, (ix - 13)
+	ld	e, d
+	call	__fmul
+	ld	hl, (ix - 4)
+	ld	e, (ix - 9)
+	call	__fadd
+	ld	(ix - 4), bc
+	ld	(ix - 9), a
+	lea	bc, iy
+	ld	a, d
+	ld	hl, (ix - 7)
+	ld	e, (ix - 8)
+	call	__fadd
+	ld	(ix - 7), bc
+	ld	(ix - 8), a
+	lea	bc, iy
+	ld	a, d
+	ld	hl, (ix + 21)
+	ld	e, (ix + 24)
+	call	__fmul
+	ld	(ix - 12), bc
+	ld	(ix - 13), a
+	ld	bc, (ix - 16)
+	ld	a, (ix - 1)
+	or	a, a
+	sbc	hl, hl
+	ld	iy, (ix - 19)
+	ld	e, 64
+	call	__fmul
+	ld	(ix - 1), a
+	ld	a, (ix - 9)
+	dec	iy
+	jp	BB4_3
+BB4_5:
+	ld	bc, (ix - 4)
+	ld	hl, (ix - 7)
+	ld	e, (ix - 8)
+	call	__fdiv
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_updatePlayerFOV
+_updatePlayerFOV:
+	ld	hl, 4788187
+	ld	e, 64
+	ld	iy, 3407872
+	ld	d, 63
+	ld	bc, (_cameraFOVDegrees)
+	ld	a, (_cameraFOVDegrees+3)
+	call	__fmul
+	lea	hl, iy
+	ld	e, 67
+	call	__fdiv
+	or	a, a
+	sbc	hl, hl
+	ld	e, d
+	call	__fmul
+	ld	l, a
+	push	hl
+	push	bc
+	call	_tanf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	ld	e, 64
+	call	__fmul
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, 7340032
+	ld	a, 67
+	call	__fdiv
+	ld	(_playerFOV), bc
+	ld	(_playerFOV+3), a
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_initPlayer
+_initPlayer:
+	call	_setCameraSpawnAboveTerrain
+	jp	_updatePlayerFOV
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_setCameraSpawnAboveTerrain
+_setCameraSpawnAboveTerrain:
+	ld	hl, -6
+	call	__frameset
+	ld	hl, _world+2296
+	ld	(ix - 3), hl
+	ld	bc, 16
+	ld	de, 0
+	push	bc
+	pop	iy
+BB7_1:
+	dec	iy
+	lea	hl, iy
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	m, BB7_4
+	ld	(ix - 6), bc
+	ld	hl, (ix - 3)
+	push	hl
+	pop	bc
+	ld	a, (hl)
+	or	a, a
+	jr	nz, BB7_5
+	lea	hl, iy
+	push	bc
+	pop	iy
+	lea	iy, iy - 16
+	ld	(ix - 3), iy
+	push	hl
+	pop	iy
+	lea	bc, iy
+	jr	BB7_1
+BB7_4:
+	ld	bc, -8388608
+	ld	l, 63
+	jr	BB7_6
+BB7_5:
+	ld	bc, (ix - 6)
+	push	bc
+	pop	hl
+	push	bc
+	pop	iy
+	add	iy, iy
+	sbc	hl, hl
+	ld	a, l
+	call	__ltof
+	ld	l, a
+BB7_6:
+	ld	iy, 1638400
+	ld	(_camX), iy
+	ld	d, 67
+	ld	a, d
+	ld	(_camX+3), a
+	ld	a, l
+	ld	hl, -7340032
+	ld	e, 65
+	call	__fmul
+	ld	hl, 1048576
+	call	__fadd
+	ld	(_camY), bc
+	ld	(_camY+3), a
+	ld	(_camZ), iy
+	ld	a, d
+	ld	(_camZ+3), a
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_updatePlayer
+_updatePlayer:
+	ld	hl, -9
+	call	__frameset
+	call	_kb_Scan
+	ld	hl, -720866
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	1, a
+	ld	iy, _rotY
+	lea	hl, iy + 3
+	ld	(ix - 3), hl
+	jr	z, BB8_2
+	ld	bc, (_rotY)
+	ld	hl, (ix - 3)
+	ld	a, (hl)
+	ld	hl, 5033165
+	ld	e, -67
+	call	__fadd
+	ld	(_rotY), bc
+	ld	(_rotY+3), a
+BB8_2:
+	ld	e, 61
+	ld	iy, -720866
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ld	a, l
+	bit	2, a
+	jr	z, BB8_4
+	ld	bc, (_rotY)
+	ld	hl, (ix - 3)
+	ld	a, (hl)
+	ld	hl, 5033165
+	call	__fadd
+	ld	(_rotY), bc
+	ld	(_rotY+3), a
+BB8_4:
+	ld	l, (iy)
+	ld	h, (iy + 1)
+	ld	bc, (_rotX)
+	ld	a, (_rotX+3)
+	ld	d, a
+	bit	3, l
+	jr	nz, BB8_6
+	ld	(ix - 6), bc
+	jr	BB8_7
+BB8_6:
+	ld	a, d
+	ld	hl, 5033165
+	ld	e, -67
+	call	__fadd
+	ld	d, a
+	ld	(ix - 6), bc
+	ld	(_rotX), bc
+	ld	(_rotX+3), a
+BB8_7:
+	ld	iyl, -65
+	ld	hl, -720866
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld.sis	bc, 1
+	call	__sand
+	bit	0, l
+	jr	nz, BB8_9
+	ld	hl, (ix - 6)
+	jr	BB8_10
+BB8_9:
+	ld	bc, (ix - 6)
+	ld	a, d
+	ld	hl, 5033165
+	ld	e, 61
+	call	__fadd
+	push	bc
+	pop	hl
+	ld	d, a
+	ld	(_rotX), hl
+	ld	(_rotX+3), a
+BB8_10:
+	ld	(ix - 6), hl
+	ld	e, d
+	ld	bc, -4194304
+	ld	a, iyl
+	call	__fcmp
+	jp	m, BB8_12
+	ld	iyl, 63
+	ld	hl, -4194304
+	ld	e, iyl
+	ld	bc, (ix - 6)
+	ld	a, d
+	call	__fcmp
+	jp	p, BB8_13
+BB8_12:
+	ld	hl, -4194304
+	ld	(_rotX), hl
+	ld	a, iyl
+	ld	(_rotX+3), a
+BB8_13:
+	ld	hl, -720878
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	6, a
+	ld	iy, _camX
+	lea	hl, iy + 3
+	ld	(ix - 9), hl
+	ld	iy, _camZ
+	lea	hl, iy + 3
+	ld	(ix - 6), hl
+	jr	z, BB8_15
+	ld	bc, (_rotY)
+	ld	hl, (ix - 3)
+	ld	e, (hl)
+	push	de
+	push	bc
+	call	_sinf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	ld	iy, (_camX)
+	ld	hl, (ix - 9)
+	ld	d, (hl)
+	ld	hl, 2097152
+	ld	e, 64
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(_camX), bc
+	ld	(_camX+3), a
+	ld	hl, (_rotY)
+	ld	a, (_rotY+3)
+	ld	e, a
+	push	de
+	push	hl
+	call	_cosf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	ld	iy, (_camZ)
+	ld	hl, (ix - 6)
+	ld	d, (hl)
+	ld	hl, 2097152
+	ld	e, 64
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(_camZ), bc
+	ld	(_camZ+3), a
+BB8_15:
+	ld	hl, -720874
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	6, a
+	jr	z, BB8_17
+	ld	bc, (_rotY)
+	ld	hl, (ix - 3)
+	ld	e, (hl)
+	push	de
+	push	bc
+	call	_sinf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	ld	iy, (_camX)
+	ld	hl, (ix - 9)
+	ld	d, (hl)
+	ld	hl, 2097152
+	ld	e, -64
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(_camX), bc
+	ld	(_camX+3), a
+	ld	hl, (_rotY)
+	ld	a, (_rotY+3)
+	ld	e, a
+	push	de
+	push	hl
+	call	_cosf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	ld	iy, (_camZ)
+	ld	hl, (ix - 6)
+	ld	d, (hl)
+	ld	hl, 2097152
+	ld	e, -64
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(_camZ), bc
+	ld	(_camZ+3), a
+BB8_17:
+	ld	hl, -720876
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	7, a
+	jr	z, BB8_19
+	ld	bc, (_rotY)
+	ld	hl, (ix - 3)
+	ld	e, (hl)
+	push	de
+	push	bc
+	call	_cosf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	ld	iy, (_camX)
+	ld	hl, (ix - 9)
+	ld	d, (hl)
+	ld	hl, 2097152
+	ld	e, -64
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(_camX), bc
+	ld	(_camX+3), a
+	ld	hl, (_rotY)
+	ld	a, (_rotY+3)
+	ld	e, a
+	push	de
+	push	hl
+	call	_sinf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	ld	iy, (_camZ)
+	ld	hl, (ix - 6)
+	ld	d, (hl)
+	ld	hl, 2097152
+	ld	e, 64
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(_camZ), bc
+	ld	(_camZ+3), a
+BB8_19:
+	ld	iy, _camY
+	ld	hl, -720872
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	7, a
+	jr	z, BB8_21
+	ld	bc, (_rotY)
+	ld	hl, (ix - 3)
+	ld	e, (hl)
+	push	de
+	push	bc
+	call	_cosf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	ld	iy, (_camX)
+	ld	hl, (ix - 9)
+	ld	d, (hl)
+	ld	hl, 2097152
+	ld	e, 64
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(_camX), bc
+	ld	(_camX+3), a
+	ld	hl, (_rotY)
+	ld	a, (_rotY+3)
+	ld	e, a
+	push	de
+	push	hl
+	call	_sinf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	ld	iy, (_camZ)
+	ld	hl, (ix - 6)
+	ld	d, (hl)
+	ld	hl, 2097152
+	ld	e, -64
+	call	__fmul
+	lea	hl, iy
+	ld	iy, _camY
+	ld	e, d
+	call	__fadd
+	ld	(_camZ), bc
+	ld	(_camZ+3), a
+BB8_21:
+	ld	hl, -720878
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	5, a
+	lea	iy, iy + 3
+	jr	z, BB8_23
+	ld	bc, (_camY)
+	ld	a, (iy)
+	ld	hl, 2097152
+	ld	e, 64
+	call	__fadd
+	ld	(_camY), bc
+	ld	(_camY+3), a
+BB8_23:
+	ld	hl, -720876
+	push	de
+	ld	e, (hl)
+	inc	hl
+	ld	d, (hl)
+	ld	l, e
+	ld	h, d
+	pop	de
+	ld	a, l
+	bit	6, a
+	jr	z, BB8_25
+	ld	bc, (_camY)
+	ld	a, (iy)
+	ld	hl, 2097152
+	ld	e, -64
+	call	__fadd
+	ld	(_camY), bc
+	ld	(_camY+3), a
+BB8_25:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_updateTransformCache
+_updateTransformCache:
+	ld	iy, _rotX
+	ld	de, (_rotX)
+	lea	hl, iy + 3
+	ld	l, (hl)
+	push	hl
+	push	de
+	call	_sinf
+	ld	a, e
+	pop	de
+	pop	de
+	ld	(_sinRotX), hl
+	ld	(_sinRotX+3), a
+	ld	hl, (_rotX)
+	ld	a, (_rotX+3)
+	ld	e, a
+	push	de
+	push	hl
+	call	_cosf
+	ld	a, e
+	pop	de
+	pop	de
+	ld	(_cosRotX), hl
+	ld	(_cosRotX+3), a
+	ld	de, (_rotY)
+	ld	iy, _rotY
+	lea	hl, iy + 3
+	ld	l, (hl)
+	push	hl
+	push	de
+	call	_sinf
+	ld	a, e
+	pop	de
+	pop	de
+	ld	(_sinRotY), hl
+	ld	(_sinRotY+3), a
+	ld	hl, (_rotY)
+	ld	a, (_rotY+3)
+	ld	e, a
+	push	de
+	push	hl
+	call	_cosf
+	ld	a, e
+	pop	de
+	pop	de
+	ld	(_cosRotY), hl
+	ld	(_cosRotY+3), a
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_transform
+_transform:
+	ld	hl, -30
+	call	__frameset
+	ld	iy, (ix + 6)
+	ld	hl, (_camX)
+	ld	a, (_camX+3)
+	ld	e, a
+	ld	bc, (iy)
+	lea	iy, iy + 3
+	ld	(ix - 6), iy
+	ld	a, (iy)
+	call	__fsub
+	ld	hl, (ix + 6)
+	ld	(hl), bc
+	ld	(iy), a
+	ld	hl, (_camY)
+	ld	a, (_camY+3)
+	ld	e, a
+	ld	iy, (ix + 9)
+	ld	bc, (iy)
+	lea	iy, iy + 3
+	ld	(ix - 16), iy
+	ld	a, (iy)
+	call	__fsub
+	ld	hl, (ix + 9)
+	ld	(hl), bc
+	ld	(iy), a
+	ld	hl, (_camZ)
+	ld	a, (_camZ+3)
+	ld	e, a
+	ld	bc, (ix + 12)
+	push	bc
+	pop	iy
+	ld	bc, (iy)
+	lea	iy, iy + 3
+	ld	a, (iy)
+	call	__fsub
+	ld	(ix - 9), bc
+	ld	e, a
+	ld	hl, (ix + 12)
+	ld	(hl), bc
+	ld	(iy), e
+	ld	(ix - 23), e
+	ld	hl, (ix + 6)
+	ld	hl, (hl)
+	ld	(ix - 3), hl
+	ld	hl, (ix - 6)
+	ld	a, (hl)
+	ld	(ix - 6), a
+	ld	hl, (_cosRotY)
+	ld	(ix - 26), hl
+	ld	a, (_cosRotY+3)
+	ld	(ix - 29), a
+	ld	hl, (_sinRotY)
+	ld	(ix - 19), hl
+	ld	a, (_sinRotY+3)
+	ld	d, a
+	ld	(ix - 20), d
+	ld	bc, (ix - 9)
+	ld	a, e
+	call	__fneg
+	push	bc
+	pop	iy
+	ld	e, a
+	push	hl
+	pop	bc
+	ld	a, d
+	lea	hl, iy
+	call	__fmul
+	ld	(ix - 12), bc
+	ld	(ix - 13), a
+	ld	bc, (ix - 3)
+	ld	a, (ix - 6)
+	ld	iy, (ix - 26)
+	lea	hl, iy
+	ld	d, (ix - 29)
+	ld	e, d
+	call	__fmul
+	ld	hl, (ix - 12)
+	ld	e, (ix - 13)
+	call	__fadd
+	ld	(ix - 12), bc
+	ld	(ix - 13), a
+	ld	bc, (ix - 9)
+	ld	a, (ix - 23)
+	lea	hl, iy
+	ld	e, d
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 3)
+	ld	a, (ix - 6)
+	ld	hl, (ix - 19)
+	ld	e, (ix - 20)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(ix - 9), bc
+	ld	e, a
+	ld	(ix - 20), e
+	ld	hl, (ix + 9)
+	ld	hl, (hl)
+	ld	(ix - 3), hl
+	ld	hl, (ix - 16)
+	ld	a, (hl)
+	ld	(ix - 6), a
+	ld	hl, (_cosRotX)
+	ld	(ix - 29), hl
+	ld	a, (_cosRotX+3)
+	ld	(ix - 30), a
+	ld	hl, (_sinRotX)
+	ld	(ix - 16), hl
+	ld	a, (_sinRotX+3)
+	ld	d, a
+	ld	(ix - 19), d
+	ld	bc, (ix - 9)
+	ld	a, e
+	call	__fneg
+	push	bc
+	pop	iy
+	ld	e, a
+	push	hl
+	pop	bc
+	ld	a, d
+	lea	hl, iy
+	call	__fmul
+	ld	(ix - 23), bc
+	ld	(ix - 26), a
+	ld	bc, (ix - 3)
+	ld	a, (ix - 6)
+	ld	iy, (ix - 29)
+	lea	hl, iy
+	ld	d, (ix - 30)
+	ld	e, d
+	call	__fmul
+	ld	hl, (ix - 23)
+	ld	e, (ix - 26)
+	call	__fadd
+	ld	(ix - 23), bc
+	ld	(ix - 26), a
+	ld	bc, (ix - 9)
+	ld	a, (ix - 20)
+	lea	hl, iy
+	ld	e, d
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 3)
+	ld	a, (ix - 6)
+	ld	hl, (ix - 16)
+	ld	e, (ix - 19)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	iy, (ix + 6)
+	ld	hl, (ix - 12)
+	ld	(iy), hl
+	ld	l, (ix - 13)
+	ld	(iy + 3), l
+	ld	iy, (ix + 9)
+	ld	hl, (ix - 23)
+	ld	(iy), hl
+	ld	l, (ix - 26)
+	ld	(iy + 3), l
+	ld	iy, (ix + 12)
+	ld	(iy), bc
+	ld	(iy + 3), a
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_cubeInView
+_cubeInView:
+	ld	hl, -43
+	call	__frameset
+	ld	d, (ix + 9)
+	ld	bc, (ix + 24)
+	or	a, a
+	sbc	hl, hl
+	ld	e, 63
+	lea	iy, ix - 12
+	ld	(ix - 22), iy
+	ld	a, (ix + 27)
+	call	__fmul
+	ld	(ix - 18), bc
+	ld	(ix - 19), a
+	ld	bc, 2
+	ld	iy, -1
+BB11_1:
+	lea	hl, iy
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	p, BB11_15
+	lea	hl, iy
+	ld	(ix - 15), iy
+	ld	iy, (ix - 15)
+	add	iy, iy
+	ld	iy, (ix - 15)
+	sbc	hl, hl
+	lea	bc, iy
+	ld	a, l
+	call	__ltof
+	ld	hl, (ix - 18)
+	ld	e, (ix - 19)
+	call	__fmul
+	ld	hl, (ix + 6)
+	ld	e, d
+	call	__fadd
+	ld	(ix - 25), bc
+	ld	de, 2
+	ld	(ix - 26), a
+	scf
+	sbc	hl, hl
+BB11_3:
+	push	hl
+	pop	bc
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	p, BB11_13
+	push	bc
+	pop	hl
+	push	bc
+	pop	iy
+	add	iy, iy
+	ld	iy, (ix - 15)
+	sbc	hl, hl
+	ld	(ix - 29), bc
+	ld	a, l
+	call	__ltof
+	ld	hl, (ix - 18)
+	ld	e, (ix - 19)
+	call	__fmul
+	ld	hl, (ix + 12)
+	ld	e, (ix + 15)
+	call	__fadd
+	ld	(ix - 32), bc
+	ld	de, 2
+	ld	(ix - 33), a
+	scf
+	sbc	hl, hl
+BB11_5:
+	push	hl
+	pop	bc
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	p, BB11_12
+	ld	hl, (ix - 25)
+	ld	(ix - 4), hl
+	ld	a, (ix - 26)
+	ld	(ix - 1), a
+	ld	hl, (ix - 32)
+	ld	(ix - 8), hl
+	ld	a, (ix - 33)
+	ld	(ix - 5), a
+	push	bc
+	pop	hl
+	push	bc
+	pop	iy
+	add	iy, iy
+	sbc	hl, hl
+	ld	(ix - 36), bc
+	ld	a, l
+	call	__ltof
+	ld	hl, (ix - 18)
+	ld	e, (ix - 19)
+	call	__fmul
+	ld	hl, (ix + 18)
+	ld	e, (ix + 21)
+	call	__fadd
+	ld	(ix - 12), bc
+	ld	iy, (ix - 22)
+	lea	hl, iy + 3
+	ld	(hl), a
+	push	iy
+	pea	ix - 8
+	pea	ix - 4
+	call	_transform
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	iy, (ix - 12)
+	ld	d, (ix - 9)
+	ld	hl, -3670016
+	ld	e, -62
+	lea	bc, iy
+	ld	a, d
+	call	__fcmp
+	jp	p, BB11_11
+	lea	hl, iy
+	ld	e, d
+	ld	bc, -6946816
+	ld	a, 68
+	call	__fcmp
+	jp	p, BB11_11
+	ld	bc, -8388608
+	ld	a, 63
+	lea	hl, iy
+	ld	e, d
+	call	__fdiv
+	ld	(ix - 39), bc
+	ld	(ix - 40), a
+	ld	hl, (ix - 4)
+	ld	e, (ix - 1)
+	call	__fmul
+	ld	e, a
+	ld	hl, (_playerFOV)
+	ld	(ix - 43), hl
+	ld	a, (_playerFOV+3)
+	ld	d, a
+	ld	a, e
+	ld	e, d
+	call	__fmul
+	ld	hl, 2097152
+	ld	e, 67
+	call	__fadd
+	call	__ftol
+	push	bc
+	pop	iy
+	ld	bc, (ix - 8)
+	ld	a, (ix - 5)
+	call	__fneg
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, (ix - 39)
+	ld	a, (ix - 40)
+	call	__fmul
+	ld	hl, (ix - 43)
+	ld	e, d
+	call	__fmul
+	ld	hl, -1048576
+	ld	e, 66
+	call	__fadd
+	call	__ftol
+	ld	de, 80
+	add	iy, de
+	lea	hl, iy
+	ld	de, 481
+	or	a, a
+	sbc	hl, de
+	jr	nc, BB11_11
+	push	bc
+	pop	hl
+	ld	de, -80
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	m, BB11_11
+	push	bc
+	pop	hl
+	ld	de, 321
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	m, BB11_14
+BB11_11:
+	ld	de, 2
+	ld	hl, (ix - 36)
+	add	hl, de
+	ld	iy, (ix - 15)
+	jp	BB11_5
+BB11_12:
+	ld	bc, 2
+	ld	hl, (ix - 29)
+	add	hl, bc
+	ld	de, 2
+	jp	BB11_3
+BB11_13:
+	ld	bc, 2
+	add	iy, bc
+	ld	d, (ix + 9)
+	jp	BB11_1
+BB11_14:
+	ld	bc, 2
+	ld	iy, (ix - 15)
+BB11_15:
+	lea	hl, iy
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	m, BB11_17
+	ld	a, 0
+	jr	BB11_18
+BB11_17:
+	ld	a, -1
+BB11_18:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_drawCubeFace
+_drawCubeFace:
+	ld	hl, -204
+	call	__frameset
+	ld	bc, (ix + 24)
+	ld	iy, 0
+	ld	e, 63
+	ld	a, (ix + 27)
+	lea	hl, iy
+	call	__fmul
+	ld	de, (ix + 30)
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -129
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	ld	bc, 6
+	ld	de, (ix - 3)
+	push	de
+	pop	hl
+	or	a, a
+	sbc	hl, bc
+	ld	bc, -150
+	lea	hl, ix
+	push	af
+	add	hl, bc
+	pop	af
+	ld	(hl), a
+	jr	c, BB12_2
+	ld	bc, -173
+	lea	hl, ix
+	add	hl, bc
+	ld	(hl), iy
+	xor	a, a
+	push	ix
+	ld	bc, -176
+	add	ix, bc
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	bc, -179
+	add	ix, bc
+	ld	(ix), iy
+	pop	ix
+	push	ix
+	ld	bc, -188
+	add	ix, bc
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	bc, -185
+	add	ix, bc
+	ld	(ix), iy
+	pop	ix
+	ld	bc, -182
+	lea	iy, ix
+	add	iy, bc
+	ld	(iy), a
+	ld	hl, (ix + 18)
+	push	ix
+	ld	bc, -142
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	push	af
+	ld	a, (ix + 21)
+	ld	iyh, a
+	pop	af
+	ld	hl, (ix + 12)
+	push	ix
+	ld	bc, -132
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	d, (ix + 15)
+	jp	BB12_11
+BB12_2:
+	ld	iyl, -65
+	ld	hl, JTI12_0
+	add	hl, de
+	add	hl, de
+	add	hl, de
+	ld	hl, (hl)
+	jp	(hl)
+BB12_3:
+	ld	bc, (ix + 6)
+	ld	e, a
+	ld	a, (ix + 9)
+	ld	(ix - 3), bc
+	ld	bc, -129
+	lea	hl, ix
+	add	hl, bc
+	ld	hl, (hl)
+	ld	bc, (ix - 3)
+	call	__fsub
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -182
+	add	ix, bc
+	push	af
+	ld	a, iyl
+	ld	(ix), a
+	pop	af
+	pop	ix
+	ld	iyl, a
+	or	a, a
+	sbc	hl, hl
+	push	ix
+	ld	bc, -173
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	xor	a, a
+	push	ix
+	ld	bc, -176
+	add	ix, bc
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	bc, -179
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	bc, -188
+	lea	hl, ix
+	add	hl, bc
+	ld	(hl), a
+	ld	de, -8388608
+	push	ix
+	ld	bc, -185
+	add	ix, bc
+	ld	(ix), de
+	jp	BB12_8
+BB12_4:
+	ld	bc, (ix + 12)
+	ld	e, a
+	ld	a, (ix + 15)
+	ld	(ix - 3), bc
+	ld	bc, -129
+	lea	hl, ix
+	add	hl, bc
+	ld	hl, (hl)
+	ld	bc, (ix - 3)
+	call	__fsub
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -132
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	ld	de, (ix - 3)
+	ld	d, a
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	pop	bc
+	ld	(ix - 3), de
+	ld	de, -173
+	lea	hl, ix
+	add	hl, de
+	ld	(hl), bc
+	xor	a, a
+	push	ix
+	ld	de, -176
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	ld	hl, -8388608
+	push	ix
+	ld	de, -179
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	ld	de, -188
+	lea	hl, ix
+	add	hl, de
+	push	af
+	ld	a, iyl
+	ld	(hl), a
+	pop	af
+	ld	de, -185
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), bc
+	push	ix
+	ld	de, -182
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	ld	hl, (ix + 18)
+	push	ix
+	ld	de, -142
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	push	af
+	ld	a, (ix + 21)
+	ld	iyh, a
+	pop	af
+	ld	bc, (ix + 6)
+	push	af
+	ld	a, (ix + 9)
+	ld	iyl, a
+	pop	af
+	ld	de, (ix - 3)
+	jp	BB12_12
+BB12_5:
+	ld	de, -129
+	lea	hl, ix
+	add	hl, de
+	ld	bc, (hl)
+	ld	hl, (ix + 12)
+	ld	e, (ix + 15)
+	call	__fadd
+	ld	(ix - 3), de
+	ld	de, -132
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), bc
+	ld	de, (ix - 3)
+	ld	d, a
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	pop	bc
+	ld	(ix - 3), de
+	ld	de, -173
+	lea	hl, ix
+	add	hl, de
+	ld	(hl), bc
+	xor	a, a
+	ld	de, (ix - 3)
+	ld	e, a
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -176
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	ld	hl, -8388608
+	push	ix
+	ld	bc, -179
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	a, 63
+	ld	bc, -188
+	lea	hl, ix
+	add	hl, bc
+	ld	(hl), a
+	ld	bc, (ix - 3)
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -185
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	ld	de, (ix - 3)
+	push	ix
+	ld	bc, -182
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	ld	hl, (ix + 18)
+	push	ix
+	ld	bc, -142
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	push	af
+	ld	a, (ix + 21)
+	ld	iyh, a
+	pop	af
+	jp	BB12_11
+BB12_6:
+	ld	bc, (ix + 18)
+	ld	e, a
+	ld	a, (ix + 21)
+	ld	(ix - 3), bc
+	ld	bc, -129
+	lea	hl, ix
+	add	hl, bc
+	ld	hl, (hl)
+	ld	bc, (ix - 3)
+	call	__fsub
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -142
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	ld	de, (ix - 3)
+	ld	e, 0
+	ld	iyh, a
+	ld	hl, -8388608
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -173
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	bc, -176
+	lea	hl, ix
+	add	hl, bc
+	push	af
+	ld	a, iyl
+	ld	(hl), a
+	pop	af
+	jp	BB12_10
+BB12_7:
+	ld	de, -129
+	lea	hl, ix
+	add	hl, de
+	ld	bc, (hl)
+	ld	hl, (ix + 6)
+	ld	e, (ix + 9)
+	call	__fadd
+	ld	iyl, a
+	or	a, a
+	sbc	hl, hl
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -173
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	xor	a, a
+	push	ix
+	ld	bc, -176
+	add	ix, bc
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	bc, -179
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	bc, -188
+	lea	hl, ix
+	add	hl, bc
+	ld	(hl), a
+	ld	de, -8388608
+	push	ix
+	ld	bc, -185
+	add	ix, bc
+	ld	(ix), de
+	pop	ix
+	ld	a, 63
+	push	ix
+	ld	bc, -182
+	add	ix, bc
+	ld	(ix), a
+BB12_8:
+	pop	ix
+	ld	hl, (ix + 18)
+	push	ix
+	ld	bc, -142
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	push	af
+	ld	a, (ix + 21)
+	ld	iyh, a
+	pop	af
+	ld	hl, (ix + 12)
+	push	ix
+	ld	bc, -132
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	d, (ix + 15)
+	ld	bc, (ix - 3)
+	jp	BB12_12
+BB12_9:
+	ld	de, -129
+	lea	hl, ix
+	add	hl, de
+	ld	bc, (hl)
+	ld	hl, (ix + 18)
+	ld	e, (ix + 21)
+	call	__fadd
+	ld	(ix - 3), de
+	ld	de, -142
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), bc
+	ld	de, (ix - 3)
+	ld	e, 0
+	ld	iyh, a
+	ld	hl, -8388608
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -173
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	a, 63
+	ld	bc, -176
+	lea	hl, ix
+	add	hl, bc
+	ld	(hl), a
+BB12_10:
+	or	a, a
+	sbc	hl, hl
+	push	ix
+	ld	bc, -179
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	push	ix
+	ld	bc, -188
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	push	ix
+	ld	bc, -185
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	bc, -182
+	lea	hl, ix
+	add	hl, bc
+	ld	(hl), e
+	ld	hl, (ix + 12)
+	push	ix
+	ld	bc, -132
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	d, (ix + 15)
+	ld	bc, (ix - 3)
+BB12_11:
+	ld	bc, (ix + 6)
+	push	af
+	ld	a, (ix + 9)
+	ld	iyl, a
+	pop	af
+BB12_12:
+	ld	hl, (_camX)
+	ld	a, (_camX+3)
+	ld	e, a
+	ld	a, iyl
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -191
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	push	ix
+	dec	bc
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fsub
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -138
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	push	ix
+	dec	de
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	ld	hl, (_camY)
+	ld	a, (_camY+3)
+	ld	de, (ix - 3)
+	ld	e, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -132
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	ld	a, d
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -195
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	push	ix
+	dec	bc
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fsub
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -132
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	push	ix
+	ld	de, -135
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	ld	hl, (_camZ)
+	ld	a, (_camZ+3)
+	ld	de, (ix - 3)
+	ld	e, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -142
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	ld	a, iyh
+	ld	de, -199
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), hl
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -200
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fsub
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -153
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	ld	de, (ix - 3)
+	ld	d, a
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -154
+	add	ix, bc
+	ld	(ix), d
+	pop	ix
+	ld	hl, (_cosRotY)
+	push	ix
+	ld	bc, -142
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	a, (_cosRotY+3)
+	dec	bc
+	lea	hl, ix
+	add	hl, bc
+	ld	(hl), a
+	ld	hl, (_sinRotY)
+	push	ix
+	ld	bc, -146
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	a, (_sinRotY+3)
+	ld	e, a
+	push	ix
+	dec	bc
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	ld	a, d
+	ld	bc, (ix - 3)
+	call	__fneg
+	push	bc
+	pop	iy
+	ld	d, a
+	push	hl
+	pop	bc
+	ld	a, e
+	lea	hl, iy
+	ld	e, d
+	call	__fmul
+	ld	(ix - 3), de
+	ld	de, -157
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), bc
+	push	ix
+	ld	de, -160
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	de, -138
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	dec	de
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -142
+	add	ix, de
+	ld	iy, (ix)
+	pop	ix
+	lea	hl, iy
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -143
+	add	ix, bc
+	ld	d, (ix)
+	pop	ix
+	ld	e, d
+	ld	bc, (ix - 3)
+	call	__fmul
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -157
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	push	ix
+	ld	bc, -160
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fadd
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -157
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	push	ix
+	ld	de, -160
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	de, -153
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	dec	de
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	lea	hl, iy
+	ld	de, (ix - 3)
+	ld	e, d
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -138
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	dec	de
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -146
+	add	ix, de
+	ld	hl, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -147
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(ix - 3), de
+	ld	de, -163
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), bc
+	ld	de, (ix - 3)
+	ld	d, a
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -164
+	add	ix, bc
+	ld	(ix), d
+	pop	ix
+	ld	hl, (_cosRotX)
+	push	ix
+	ld	bc, -138
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	a, (_cosRotX+3)
+	dec	bc
+	lea	hl, ix
+	add	hl, bc
+	ld	(hl), a
+	ld	hl, (_sinRotX)
+	push	ix
+	ld	bc, -153
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	a, (_sinRotX+3)
+	ld	e, a
+	push	ix
+	dec	bc
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	ld	a, d
+	ld	bc, (ix - 3)
+	call	__fneg
+	push	bc
+	pop	iy
+	ld	d, a
+	push	hl
+	pop	bc
+	ld	a, e
+	lea	hl, iy
+	ld	e, d
+	call	__fmul
+	ld	(ix - 3), de
+	ld	de, -167
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), bc
+	push	ix
+	ld	de, -170
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	de, -132
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -135
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -138
+	add	ix, de
+	ld	iy, (ix)
+	pop	ix
+	lea	hl, iy
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -139
+	add	ix, bc
+	ld	d, (ix)
+	pop	ix
+	ld	e, d
+	ld	bc, (ix - 3)
+	call	__fmul
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -167
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	push	ix
+	ld	bc, -170
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fadd
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -167
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	push	ix
+	ld	de, -170
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	de, -163
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	dec	de
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	lea	hl, iy
+	ld	de, (ix - 3)
+	ld	e, d
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -132
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -135
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -153
+	add	ix, de
+	ld	hl, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -154
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(ix - 3), de
+	ld	de, -132
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), bc
+	push	ix
+	ld	de, -135
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	de, -179
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -188
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -167
+	add	ix, de
+	ld	hl, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -170
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -185
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -182
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -157
+	add	ix, de
+	ld	hl, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -160
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -173
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -176
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -132
+	add	ix, de
+	ld	hl, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -135
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	hl, -3355443
+	ld	e, -67
+	call	__fcmp
+	jp	m, BB12_26
+	ld	hl, ___const.drawCubeFace.indices
+	ld	de, -132
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), hl
+	ld	a, 1
+	ld	de, -164
+	lea	hl, ix
+	add	hl, de
+	ld	(hl), a
+	lea	hl, ix - 102
+	push	ix
+	ld	de, -182
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	lea	hl, ix - 114
+	push	ix
+	ld	de, -185
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	lea	hl, ix - 126
+	push	ix
+	ld	de, -188
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	ld	hl, (ix + 6)
+	push	hl
+	pop	bc
+	ld	a, (ix + 9)
+	ld	de, -129
+	lea	hl, ix
+	add	hl, de
+	ld	iy, (hl)
+	lea	hl, iy
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -150
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fsub
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -135
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	push	ix
+	ld	de, -157
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	ld	(ix - 102), bc
+	ld	(ix - 99), a
+	ld	hl, (ix + 12)
+	push	hl
+	pop	bc
+	ld	a, (ix + 15)
+	lea	hl, iy
+	ld	de, (ix - 3)
+	call	__fsub
+	ld	(ix - 3), de
+	ld	de, -160
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), bc
+	push	ix
+	ld	de, -163
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	ld	(ix - 98), bc
+	ld	(ix - 95), a
+	ld	iy, (ix + 18)
+	lea	bc, iy
+	ld	a, (ix + 21)
+	ld	de, -129
+	lea	iy, ix
+	add	iy, de
+	ld	hl, (iy)
+	ld	de, (ix - 3)
+	call	__fsub
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	(ix - 94), iy
+	ld	(ix - 91), d
+	push	hl
+	pop	bc
+	ld	a, e
+	ld	hl, (ix + 6)
+	ld	e, (ix + 9)
+	call	__fadd
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -167
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	push	ix
+	ld	de, -170
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	ld	(ix - 90), bc
+	ld	(ix - 87), a
+	push	ix
+	ld	de, -160
+	add	ix, de
+	ld	hl, (ix)
+	pop	ix
+	ld	(ix - 86), hl
+	ld	de, -163
+	lea	hl, ix
+	add	hl, de
+	ld	l, (hl)
+	ld	(ix - 83), l
+	push	ix
+	ld	de, -179
+	add	ix, de
+	ld	(ix), iy
+	pop	ix
+	ld	(ix - 82), iy
+	ld	de, (ix - 3)
+	ld	(ix - 79), d
+	ld	(ix - 78), bc
+	ld	(ix - 75), a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -129
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -150
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	ld	hl, (ix + 12)
+	ld	de, (ix - 3)
+	ld	e, (ix + 15)
+	call	__fadd
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -173
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	push	ix
+	ld	de, -176
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	ld	(ix - 74), bc
+	ld	(ix - 71), a
+	ld	(ix - 70), iy
+	ld	de, (ix - 3)
+	ld	(ix - 67), d
+	ld	(ix - 3), de
+	ld	de, -135
+	lea	iy, ix
+	add	iy, de
+	ld	iy, (iy)
+	ld	(ix - 66), iy
+	push	ix
+	ld	de, -157
+	add	ix, de
+	ld	l, (ix)
+	pop	ix
+	ld	(ix - 63), l
+	ld	(ix - 62), bc
+	ld	(ix - 59), a
+	push	ix
+	ld	de, -179
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	ld	(ix - 58), bc
+	ld	de, (ix - 3)
+	ld	(ix - 55), d
+	ld	(ix - 54), iy
+	ld	(ix - 51), l
+	ld	bc, -160
+	lea	iy, ix
+	add	iy, bc
+	ld	iy, (iy)
+	ld	(ix - 50), iy
+	push	ix
+	ld	bc, -163
+	add	ix, bc
+	ld	d, (ix)
+	pop	ix
+	ld	(ix - 47), d
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -129
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -150
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	ld	hl, (ix + 18)
+	ld	de, (ix - 3)
+	ld	e, (ix + 21)
+	call	__fadd
+	ld	(ix - 46), bc
+	ld	(ix - 43), a
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -167
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	ld	(ix - 42), hl
+	push	ix
+	ld	bc, -170
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	(ix - 39), e
+	ld	(ix - 38), iy
+	ld	(ix - 35), d
+	ld	bc, (ix - 3)
+	ld	(ix - 34), bc
+	ld	(ix - 31), a
+	ld	(ix - 30), hl
+	ld	(ix - 27), e
+	ld	de, -173
+	lea	hl, ix
+	add	hl, de
+	ld	iy, (hl)
+	ld	(ix - 26), iy
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -176
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	(ix - 23), e
+	ld	bc, (ix - 3)
+	ld	(ix - 22), bc
+	ld	(ix - 19), a
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -135
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	ld	(ix - 18), hl
+	ld	bc, -157
+	lea	hl, ix
+	add	hl, bc
+	ld	l, (hl)
+	ld	(ix - 15), l
+	ld	(ix - 14), iy
+	ld	(ix - 11), e
+	ld	bc, (ix - 3)
+	ld	(ix - 10), bc
+	ld	(ix - 7), a
+	ld	iy, (_playerFOV)
+	ld	a, (_playerFOV+3)
+	push	ix
+	ld	de, -129
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	ld	hl, (ix + 30)
+	ld	bc, 12
+	call	__imulu
+	push	hl
+	pop	de
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -132
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	add	hl, de
+	push	ix
+	ld	de, -132
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	ld	bc, (ix - 3)
+	ld	bc, 12
+	ld	de, 0
+BB12_14:
+	push	de
+	pop	hl
+	or	a, a
+	sbc	hl, bc
+	jp	z, BB12_17
+	ld	bc, -170
+	lea	hl, ix
+	add	hl, bc
+	ld	(hl), iy
+	push	de
+	pop	bc
+	ld	(ix - 3), de
+	ld	de, -132
+	lea	iy, ix
+	add	iy, de
+	ld	hl, (iy)
+	add	hl, bc
+	ld	hl, (hl)
+	ld	bc, 12
+	call	__imulu
+	push	hl
+	pop	bc
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -160
+	add	ix, bc
+	ld	(ix), de
+	pop	ix
+	push	ix
+	ld	de, -182
+	add	ix, de
+	ld	iy, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	add	iy, bc
+	ld	bc, (iy)
+	ld	a, (iy + 3)
+	push	ix
+	ld	de, -191
+	add	ix, de
+	ld	hl, (ix)
+	pop	ix
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -192
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fsub
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -135
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	ld	de, (ix - 3)
+	ld	d, a
+	ld	bc, (iy + 4)
+	ld	a, (iy + 7)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -195
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	push	ix
+	dec	bc
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fsub
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -150
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	push	ix
+	ld	de, -157
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	ld	bc, (iy + 8)
+	ld	a, (iy + 11)
+	ld	de, -199
+	lea	iy, ix
+	add	iy, de
+	ld	hl, (iy)
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -200
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fsub
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -142
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	dec	de
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -176
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -179
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -163
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	de, -135
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -173
+	add	ix, bc
+	ld	(ix), d
+	pop	ix
+	ld	a, d
+	push	ix
+	ld	bc, -146
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	push	ix
+	dec	bc
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	lea	hl, iy
+	ld	(ix - 3), bc
+	ld	bc, -163
+	lea	iy, ix
+	add	iy, bc
+	ld	e, (iy)
+	ld	bc, (ix - 3)
+	call	__fadd
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -138
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	dec	de
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -203
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -204
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -163
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	push	ix
+	ld	de, -167
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	de, -150
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -157
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -153
+	add	ix, de
+	ld	iy, (ix)
+	pop	ix
+	lea	hl, iy
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -154
+	add	ix, bc
+	ld	d, (ix)
+	pop	ix
+	ld	e, d
+	ld	bc, (ix - 3)
+	call	__fmul
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -163
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	push	ix
+	ld	bc, -167
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fadd
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -163
+	add	ix, de
+	ld	(ix), bc
+	pop	ix
+	push	bc
+	pop	hl
+	push	ix
+	ld	bc, -167
+	add	ix, bc
+	ld	(ix), a
+	pop	ix
+	ld	de, (ix - 3)
+	ld	e, a
+	ld	bc, -6291456
+	ld	a, 64
+	call	__fcmp
+	jp	m, BB12_26
+	ld	(ix - 3), de
+	ld	de, -203
+	lea	hl, ix
+	add	hl, de
+	ld	bc, (hl)
+	push	ix
+	dec	de
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	call	__fneg
+	push	bc
+	pop	hl
+	ld	de, (ix - 3)
+	ld	e, a
+	lea	bc, iy
+	ld	a, d
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -150
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -157
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -138
+	add	ix, de
+	ld	hl, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -139
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	ld	(ix - 3), de
+	ld	de, -150
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), bc
+	push	ix
+	ld	de, -157
+	add	ix, de
+	ld	(ix), a
+	pop	ix
+	push	ix
+	ld	de, -176
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -179
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	call	__fneg
+	push	bc
+	pop	hl
+	ld	de, (ix - 3)
+	ld	e, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -146
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	dec	de
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -135
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -173
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	push	ix
+	ld	de, -142
+	add	ix, de
+	ld	hl, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -143
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, -8388608
+	ld	a, 63
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -163
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	push	ix
+	ld	bc, -167
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fdiv
+	push	bc
+	pop	hl
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -163
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	ld	e, a
+	push	ix
+	ld	bc, -167
+	add	ix, bc
+	ld	(ix), e
+	pop	ix
+	ld	bc, (ix - 3)
+	lea	bc, iy
+	ld	a, d
+	call	__fmul
+	ld	(ix - 3), bc
+	ld	bc, -170
+	lea	iy, ix
+	add	iy, bc
+	ld	iy, (iy)
+	lea	hl, iy
+	push	ix
+	ld	bc, -129
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	ld	hl, 2097152
+	ld	e, 67
+	call	__fadd
+	call	__ftol
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -160
+	add	ix, bc
+	ld	de, (ix)
+	pop	ix
+	push	ix
+	ld	bc, -135
+	add	ix, bc
+	ld	(ix), de
+	pop	ix
+	push	ix
+	ld	bc, -185
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	add	hl, de
+	ld	bc, (ix - 3)
+	ld	(hl), bc
+	ld	de, -150
+	lea	hl, ix
+	add	hl, de
+	ld	bc, (hl)
+	push	ix
+	ld	de, -157
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	call	__fneg
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	(ix - 3), de
+	push	ix
+	ld	de, -163
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	ix
+	ld	de, -167
+	add	ix, de
+	ld	a, (ix)
+	pop	ix
+	ld	de, (ix - 3)
+	call	__fmul
+	lea	hl, iy
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -129
+	add	ix, bc
+	ld	e, (ix)
+	pop	ix
+	ld	bc, (ix - 3)
+	call	__fmul
+	ld	hl, -1048576
+	ld	e, 66
+	call	__fadd
+	call	__ftol
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -188
+	add	ix, bc
+	ld	hl, (ix)
+	pop	ix
+	push	ix
+	ld	bc, -135
+	add	ix, bc
+	ld	de, (ix)
+	pop	ix
+	add	hl, de
+	ld	bc, (ix - 3)
+	ld	(hl), bc
+	ld	de, 3
+	ld	bc, -160
+	lea	hl, ix
+	add	hl, bc
+	ld	hl, (hl)
+	add	hl, de
+	ex	de, hl
+	ld	bc, 12
+	jp	BB12_14
+BB12_17:
+	ld	a, (_cursorBlockValid)
+	bit	0, a
+	jr	z, BB12_22
+	ld	hl, (_cursorBlockX)
+	ld	de, (ix + 36)
+	or	a, a
+	sbc	hl, de
+	jr	nz, BB12_22
+	ld	hl, (_cursorBlockY)
+	ld	de, (ix + 39)
+	or	a, a
+	sbc	hl, de
+	jr	nz, BB12_22
+	ld	hl, (_cursorBlockZ)
+	ld	de, (ix + 42)
+	or	a, a
+	sbc	hl, de
+	jr	nz, BB12_22
+	ld	a, (-851968)
+	and	a, 1
+	bit	0, a
+	ld	hl, -2
+	jr	z, BB12_23
+BB12_22:
+	ld	bc, 12
+	ld	hl, (ix + 33)
+	call	__imulu
+	push	hl
+	pop	de
+	ld	iy, _texture_colors
+	add	iy, de
+	ld	c, 1
+	ld	hl, (ix + 30)
+	call	__ishl
+	push	hl
+	pop	de
+	add	iy, de
+	ld	l, (iy)
+	xor	a, a
+	ld	de, -164
+	lea	iy, ix
+	add	iy, de
+	ld	(iy), a
+BB12_23:
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	iy, (ix - 114)
+	ld	bc, (ix - 126)
+	ld	hl, (ix - 111)
+	push	ix
+	ld	de, -129
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	ld	hl, (ix - 123)
+	push	ix
+	ld	de, -135
+	add	ix, de
+	ld	(ix), hl
+	pop	ix
+	ld	de, (ix - 108)
+	ld	hl, (ix - 120)
+	ld	(ix - 3), bc
+	push	ix
+	ld	bc, -138
+	add	ix, bc
+	ld	(ix), hl
+	pop	ix
+	push	hl
+	ld	bc, -132
+	lea	hl, ix
+	add	hl, bc
+	ld	(hl), de
+	push	de
+	push	ix
+	ld	de, -135
+	add	ix, de
+	ld	hl, (ix)
+	pop	ix
+	push	hl
+	ld	de, -129
+	lea	hl, ix
+	add	hl, de
+	ld	hl, (hl)
+	push	hl
+	ld	bc, (ix - 3)
+	ld	de, -135
+	lea	hl, ix
+	add	hl, de
+	ld	(hl), bc
+	push	bc
+	push	ix
+	ld	bc, -129
+	add	ix, bc
+	ld	(ix), iy
+	pop	ix
+	push	iy
+	call	_gfx_FillTriangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	bc, -164
+	lea	hl, ix
+	add	hl, bc
+	bit	0, (hl)
+	ld	hl, -2
+	jr	nz, BB12_25
+	ld	bc, 12
+	ld	hl, (ix + 33)
+	call	__imulu
+	push	hl
+	pop	de
+	ld	iy, _texture_colors
+	add	iy, de
+	ld	c, 1
+	ld	hl, (ix + 30)
+	call	__ishl
+	push	hl
+	pop	de
+	add	iy, de
+	ld	l, (iy + 1)
+BB12_25:
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	hl, (ix - 105)
+	ld	de, (ix - 117)
+	ld	(ix - 3), de
+	ld	de, -135
+	lea	iy, ix
+	add	iy, de
+	ld	bc, (iy)
+	push	bc
+	push	ix
+	ld	de, -129
+	add	ix, de
+	ld	bc, (ix)
+	pop	ix
+	push	bc
+	ld	de, (ix - 3)
+	push	de
+	push	hl
+	ld	bc, -138
+	lea	hl, ix
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	ld	bc, -132
+	lea	hl, ix
+	add	hl, bc
+	ld	hl, (hl)
+	push	hl
+	call	_gfx_FillTriangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+BB12_26:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+	section	.rodata,"a",@progbits
+	private	JTI12_0
+JTI12_0:
+	dl	BB12_3
+	dl	BB12_7
+	dl	BB12_4
+	dl	BB12_5
+	dl	BB12_6
+	dl	BB12_9
+
+	section	.text,"ax",@progbits
+	public	_drawSkybox
+_drawSkybox:
+	ld	hl, -97
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	hl, 80
+	push	hl
+	ld	hl, 320
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	push	hl
+	call	_gfx_FillRectangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 127
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	de, 80
+	push	de
+	ld	hl, 320
+	push	hl
+	push	de
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	call	_gfx_FillRectangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 95
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	hl, 80
+	push	hl
+	ld	hl, 320
+	push	hl
+	ld	hl, 160
+	push	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	call	_gfx_FillRectangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_updateCursorTarget
+_updateCursorTarget:
+	ld	hl, -57
+	call	__frameset
+	xor	a, a
+	ld	bc, -8388608
+	ld	d, -65
+	ld	hl, -7340032
+	ld	e, 65
+	ld	iy, _world
+	ld	(ix - 3), iy
+	ld	(_cursorBlockValid), a
+	ld	(_closestCursorDot), bc
+	ld	a, d
+	ld	(_closestCursorDot+3), a
+	ld	bc, (_camX)
+	ld	a, (_camX+3)
+	call	__fdiv
+	call	__ftol
+	ld	(ix - 9), bc
+	ld	bc, (_camZ)
+	ld	a, (_camZ+3)
+	call	__fdiv
+	call	__ftol
+	ld	(ix - 21), bc
+	ld	hl, (_sinRotY)
+	ld	(ix - 12), hl
+	ld	a, (_sinRotY+3)
+	ld	(ix - 15), a
+	ld	bc, (_rotX)
+	ld	iy, _rotX
+	lea	hl, iy + 3
+	ld	(ix - 6), hl
+	ld	e, (hl)
+	push	de
+	push	bc
+	call	_cosf
+	pop	bc
+	pop	bc
+	ld	bc, (ix - 12)
+	ld	a, (ix - 15)
+	call	__fmul
+	ld	(ix - 24), bc
+	ld	(ix - 25), a
+	ld	bc, (_rotX)
+	ld	hl, (ix - 6)
+	ld	e, (hl)
+	push	de
+	push	bc
+	call	_sinf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	call	__fneg
+	ld	(ix - 28), bc
+	ld	(ix - 29), a
+	ld	hl, (_cosRotY)
+	ld	(ix - 6), hl
+	ld	a, (_cosRotY+3)
+	ld	(ix - 12), a
+	ld	hl, (_rotX)
+	ld	a, (_rotX+3)
+	ld	e, a
+	push	de
+	push	hl
+	call	_cosf
+	pop	bc
+	pop	bc
+	ld	bc, (ix - 6)
+	ld	a, (ix - 12)
+	call	__fmul
+	ld	(ix - 32), bc
+	ld	(ix - 33), a
+	ld	bc, (_renderDistance)
+	ld	(ix - 12), bc
+	ld	de, (ix - 9)
+	push	de
+	pop	hl
+	or	a, a
+	sbc	hl, bc
+	ld	(ix - 6), hl
+	ld	c, 8
+	ex	de, hl
+	call	__ishl
+	push	hl
+	pop	iy
+	ld	de, 240
+	add	iy, de
+	ld	hl, (ix - 12)
+	call	__ishl
+	push	hl
+	pop	de
+	lea	hl, iy
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	de
+	ld	hl, (ix - 3)
+	add	hl, de
+	ld	iy, (ix - 9)
+	ld	(ix - 3), hl
+	ld	de, (ix - 12)
+	ld	(ix - 15), de
+BB14_1:
+	push	de
+	pop	hl
+	lea	bc, iy
+	add	hl, bc
+	ld	bc, (ix - 6)
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	m, BB14_20
+	ld	(ix - 18), de
+	push	bc
+	pop	iy
+	push	bc
+	pop	hl
+	ld	bc, 16
+	or	a, a
+	sbc	hl, bc
+	jp	nc, BB14_19
+	ld	hl, (ix - 21)
+	ld	bc, (ix - 18)
+	or	a, a
+	sbc	hl, bc
+	ld	(ix - 18), hl
+	lea	hl, iy
+	lea	bc, iy
+	add	iy, iy
+	sbc	hl, hl
+	ld	a, l
+	call	__ltof
+	ld	hl, -7340032
+	ld	e, 65
+	call	__fmul
+	ld	hl, 1048576
+	call	__fadd
+	ld	(ix - 36), bc
+	ld	bc, (ix - 18)
+	ld	de, (ix - 21)
+	ld	(ix - 37), a
+BB14_4:
+	ld	hl, (ix - 15)
+	add	hl, de
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	m, BB14_18
+	push	bc
+	pop	hl
+	push	bc
+	pop	iy
+	ld	bc, 16
+	or	a, a
+	sbc	hl, bc
+	jp	nc, BB14_17
+	ld	(ix - 18), iy
+	lea	hl, iy
+	lea	bc, iy
+	add	iy, iy
+	sbc	hl, hl
+	ld	a, l
+	call	__ltof
+	ld	hl, -7340032
+	ld	e, 65
+	call	__fmul
+	ld	hl, 1048576
+	call	__fadd
+	ld	(ix - 40), bc
+	ld	(ix - 41), a
+	ld	iy, (ix - 3)
+	ld	bc, 15
+BB14_7:
+	push	bc
+	pop	hl
+	ld	de, 0
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	m, BB14_16
+	ld	(ix - 12), bc
+	push	bc
+	pop	hl
+	ld	de, 16
+	or	a, a
+	sbc	hl, de
+	jp	nc, BB14_15
+	ld	(ix - 15), iy
+	ld	iy, (ix - 15)
+	ld	de, (ix - 18)
+	add	iy, de
+	ld	a, (iy)
+	ld	iy, (ix - 15)
+	or	a, a
+	jp	z, BB14_15
+	ld	bc, (ix - 12)
+	push	bc
+	pop	hl
+	push	bc
+	pop	iy
+	add	iy, iy
+	sbc	hl, hl
+	ld	a, l
+	call	__ltof
+	ld	hl, -7340032
+	ld	e, 65
+	call	__fmul
+	ld	hl, 1048576
+	call	__fadd
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	hl, (_camX)
+	ld	a, (_camX+3)
+	ld	e, a
+	ld	bc, (ix - 36)
+	ld	a, (ix - 37)
+	call	__fsub
+	ld	(ix - 44), bc
+	ld	(ix - 45), a
+	ld	hl, (_camY)
+	ld	a, (_camY+3)
+	ld	e, a
+	lea	bc, iy
+	ld	a, d
+	call	__fsub
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	hl, (_camZ)
+	ld	a, (_camZ+3)
+	ld	e, a
+	ld	bc, (ix - 40)
+	ld	a, (ix - 41)
+	call	__fsub
+	ld	(ix - 48), bc
+	ld	(ix - 49), a
+	ld	(ix - 52), iy
+	lea	bc, iy
+	ld	(ix - 53), d
+	ld	a, d
+	ld	hl, (ix - 28)
+	ld	e, (ix - 29)
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 44)
+	ld	a, (ix - 45)
+	ld	hl, (ix - 24)
+	ld	e, (ix - 25)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 48)
+	ld	a, (ix - 49)
+	ld	hl, (ix - 32)
+	ld	e, (ix - 33)
+	call	__fmul
+	lea	hl, iy
+	ld	iy, (ix - 15)
+	ld	e, d
+	call	__fadd
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, 0
+	ld	a, 63
+	call	__fcmp
+	jp	m, BB14_15
+	ld	bc, (ix - 52)
+	ld	a, (ix - 53)
+	push	bc
+	pop	hl
+	ld	e, a
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 44)
+	ld	a, (ix - 45)
+	push	bc
+	pop	hl
+	ld	e, a
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 48)
+	ld	a, (ix - 49)
+	push	bc
+	pop	hl
+	ld	e, a
+	call	__fmul
+	lea	hl, iy
+	ld	iy, (ix - 15)
+	ld	e, d
+	call	__fadd
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, -3033321
+	ld	a, 56
+	call	__fcmp
+	jp	m, BB14_15
+	push	de
+	push	hl
+	call	_sqrtf
+	pop	bc
+	pop	bc
+	ld	bc, -8388608
+	ld	a, 63
+	call	__fdiv
+	push	bc
+	pop	hl
+	ld	e, a
+	ld	bc, (ix - 44)
+	ld	a, (ix - 45)
+	call	__fmul
+	ld	(ix - 56), bc
+	ld	(ix - 57), a
+	ld	bc, (ix - 52)
+	ld	a, (ix - 53)
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 48)
+	ld	a, (ix - 49)
+	call	__fmul
+	ld	(ix - 44), bc
+	ld	(ix - 45), a
+	lea	bc, iy
+	ld	a, d
+	ld	hl, (ix - 28)
+	ld	e, (ix - 29)
+	call	__fmul
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 56)
+	ld	a, (ix - 57)
+	ld	hl, (ix - 24)
+	ld	e, (ix - 25)
+	call	__fmul
+	lea	hl, iy
+	ld	e, d
+	call	__fadd
+	push	bc
+	pop	iy
+	ld	d, a
+	ld	bc, (ix - 44)
+	ld	a, (ix - 45)
+	ld	hl, (ix - 32)
+	ld	e, (ix - 33)
+	call	__fmul
+	lea	hl, iy
+	ld	iy, (ix - 15)
+	ld	e, d
+	call	__fadd
+	ld	d, a
+	ld	hl, (_closestCursorDot)
+	ld	a, (_closestCursorDot+3)
+	ld	e, a
+	ld	a, d
+	call	__fcmp
+	jp	p, BB14_15
+	ld	hl, 2516582
+	ld	e, 63
+	ld	a, d
+	call	__fcmp
+	jp	p, BB14_15
+	ld	(_closestCursorDot), bc
+	ld	a, d
+	ld	(_closestCursorDot+3), a
+	ld	hl, (ix - 6)
+	ld	(_cursorBlockX), hl
+	ld	hl, (ix - 12)
+	ld	(_cursorBlockY), hl
+	ld	hl, (ix - 18)
+	ld	(_cursorBlockZ), hl
+	ld	a, 1
+	ld	(_cursorBlockValid), a
+BB14_15:
+	ld	bc, (ix - 12)
+	dec	bc
+	lea	iy, iy - 16
+	jp	BB14_7
+BB14_16:
+	ld	hl, (_renderDistance)
+	ld	(ix - 12), hl
+	ld	de, (ix - 21)
+	ld	iy, (ix - 18)
+BB14_17:
+	inc	iy
+	ld	hl, (ix - 12)
+	ld	(ix - 15), hl
+	lea	bc, iy
+	jp	BB14_4
+BB14_18:
+	ld	hl, (ix - 15)
+	ld	(ix - 18), hl
+BB14_19:
+	ld	hl, (ix - 6)
+	inc	hl
+	ld	(ix - 6), hl
+	ld	bc, 256
+	ld	hl, (ix - 3)
+	add	hl, bc
+	ld	(ix - 3), hl
+	ld	iy, (ix - 9)
+	ld	de, (ix - 18)
+	jp	BB14_1
+BB14_20:
+	ld	a, (_cursorBlockValid)
+	bit	0, a
+	jr	nz, BB14_23
+	ld	hl, (_updateCursorTarget.cursorMissFrames)
+	push	hl
+	pop	de
+	inc	de
+	ld	(_updateCursorTarget.cursorMissFrames), de
+	ld	de, 3
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	m, BB14_24
+	scf
+	sbc	hl, hl
+	ld	(_cursorBlockX), hl
+	ld	(_cursorBlockY), hl
+	ld	(_cursorBlockZ), hl
+	jr	BB14_24
+BB14_23:
+	or	a, a
+	sbc	hl, hl
+	ld	(_updateCursorTarget.cursorMissFrames), hl
+BB14_24:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_drawWorld
+_drawWorld:
+	ld	hl, -67
+	call	__frameset
+	call	_updateTransformCache
+	ld	bc, (_camX)
+	ld	a, (_camX+3)
+	ld	hl, -7340032
+	ld	e, 65
+	call	__fdiv
+	call	__ftol
+	ld	(ix - 9), bc
+	ld	bc, (_camY)
+	ld	a, (_camY+3)
+	call	__fdiv
+	call	__ftol
+	ld	(ix - 6), bc
+	ld	bc, (_camZ)
+	ld	a, (_camZ+3)
+	call	__fdiv
+	call	__ftol
+	ld	(ix - 15), bc
+	ld	de, (_renderDistance)
+	ld	hl, (ix - 6)
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	bc
+	ld	(ix - 3), de
+	push	de
+	pop	iy
+	ld	de, (ix - 6)
+	add	iy, de
+	ld	de, 1
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	p, BB15_2
+	ld	bc, 0
+BB15_2:
+	ld	(ix - 30), bc
+	ld	e, 63
+	ld	bc, 15
+	lea	hl, iy
+	or	a, a
+	sbc	hl, bc
+	call	pe, __setflag
+	jp	m, BB15_4
+	ld	iy, 15
+BB15_4:
+	ld	(ix - 24), iy
+	ld	hl, (ix - 3)
+	push	hl
+	pop	bc
+	push	bc
+	pop	iy
+	add	iy, iy
+	sbc	hl, hl
+	ld	a, l
+	call	__ltof
+	or	a, a
+	sbc	hl, hl
+	call	__fadd
+	ld	hl, -7340032
+	ld	e, 65
+	call	__fmul
+	push	bc
+	pop	hl
+	ld	e, a
+	call	__fmul
+	ld	(ix - 33), bc
+	ld	(ix - 34), a
+	ld	bc, (ix - 9)
+	push	bc
+	pop	hl
+	ld	de, (ix - 3)
+	or	a, a
+	sbc	hl, de
+	ld	(ix - 6), hl
+	push	bc
+	pop	hl
+	ld	bc, 1536
+	call	__imulu
+	push	hl
+	pop	iy
+	ld	hl, (ix - 24)
+	ld	bc, 96
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	hl, (ix - 15)
+	ld	bc, 6
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ex	de, hl
+	ld	bc, 1536
+	call	__imulu
+	ld	bc, (ix - 9)
+	push	hl
+	pop	de
+	lea	hl, iy
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	de
+	ld	iy, _faceVisible
+	add	iy, de
+	ld	(ix - 12), iy
+	ld	de, (ix - 3)
+	ld	(ix - 18), de
+	or	a, a
+	sbc	hl, hl
+	ld	(ix - 27), hl
+	ex	de, hl
+BB15_5:
+	push	hl
+	pop	iy
+	add	hl, bc
+	ld	de, (ix - 6)
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	m, BB15_31
+	push	de
+	pop	hl
+	ld	bc, 16
+	or	a, a
+	sbc	hl, bc
+	jr	c, BB15_8
+	lea	hl, iy
+	ld	iy, (ix - 12)
+	ld	bc, (ix - 18)
+	jp	BB15_30
+BB15_8:
+	ld	hl, (ix - 15)
+	lea	bc, iy
+	ld	(ix - 3), bc
+	or	a, a
+	sbc	hl, bc
+	ld	(ix - 21), hl
+	push	de
+	pop	hl
+	ld	bc, (ix - 9)
+	or	a, a
+	sbc	hl, bc
+	push	hl
+	pop	bc
+	call	__imulu
+	ld	(ix - 37), hl
+	push	de
+	pop	hl
+	push	de
+	pop	iy
+	add	iy, iy
+	ld	iy, (ix - 12)
+	sbc	hl, hl
+	push	de
+	pop	bc
+	ld	a, l
+	call	__ltof
+	ld	hl, -7340032
+	ld	e, 65
+	call	__fmul
+	ld	hl, 1048576
+	call	__fadd
+	ld	(ix - 40), bc
+	ld	l, a
+	ld	(ix - 43), hl
+	ld	hl, (ix - 3)
+	ld	bc, -6
+	call	__imulu
+	ld	de, (ix - 15)
+	push	hl
+	pop	bc
+	lea	hl, iy
+	add	hl, bc
+	ld	(ix - 3), hl
+	ld	bc, (ix - 18)
+BB15_9:
+	push	bc
+	pop	hl
+	add	hl, de
+	ld	de, (ix - 21)
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	m, BB15_29
+	ld	(ix - 18), bc
+	ld	(ix - 12), iy
+	push	de
+	pop	hl
+	push	de
+	pop	iy
+	ld	de, 16
+	or	a, a
+	sbc	hl, de
+	jp	nc, BB15_28
+	lea	hl, iy
+	ld	de, (ix - 15)
+	or	a, a
+	sbc	hl, de
+	push	hl
+	pop	bc
+	call	__imulu
+	ld	de, (ix - 37)
+	add	hl, de
+	ex	de, hl
+	ld	bc, (ix - 18)
+	push	bc
+	pop	hl
+	call	__imulu
+	or	a, a
+	sbc	hl, de
+	jp	c, BB15_28
+	lea	hl, iy
+	lea	bc, iy
+	add	iy, iy
+	sbc	hl, hl
+	ld	a, l
+	call	__ltof
+	ld	hl, -7340032
+	ld	e, 65
+	call	__fmul
+	ld	hl, 1048576
+	call	__fadd
+	ld	(ix - 49), bc
+	ld	l, a
+	ld	(ix - 52), hl
+	ld	iy, (ix - 3)
+	ld	de, (ix - 24)
+BB15_13:
+	ld	bc, (ix - 15)
+	ld	(ix - 18), de
+	ex	de, hl
+	ld	de, (ix - 30)
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	m, BB15_27
+	ld	(ix - 46), iy
+	ld	hl, (ix - 6)
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	de
+	ld	iy, _world
+	add	iy, de
+	ld	hl, (ix - 18)
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	de
+	add	iy, de
+	ld	de, (ix - 21)
+	add	iy, de
+	ld	a, (iy)
+	ld	(ix - 55), a
+	or	a, a
+	ld	de, (ix - 18)
+	jr	z, BB15_16
+	ld	hl, (ix - 6)
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _anyFaceVisible
+	add	iy, bc
+	push	de
+	pop	hl
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	bc, (ix - 21)
+	add	iy, bc
+	bit	0, (iy)
+	jr	nz, BB15_17
+BB15_16:
+	dec	de
+	ld	iy, (ix - 46)
+	lea	iy, iy - 96
+	jr	BB15_13
+BB15_17:
+	push	de
+	pop	hl
+	push	de
+	pop	iy
+	add	iy, iy
+	sbc	hl, hl
+	push	de
+	pop	bc
+	ld	a, l
+	call	__ltof
+	ld	hl, -7340032
+	ld	e, 65
+	call	__fmul
+	ld	hl, 1048576
+	call	__fadd
+	ld	(ix - 64), bc
+	ld	l, a
+	ld	(ix - 67), hl
+	ld	bc, (_camX)
+	ld	a, (_camX+3)
+	ld	hl, (ix - 40)
+	ld	de, (ix - 43)
+	call	__fsub
+	push	bc
+	pop	iy
+	ld	(ix - 58), a
+	ld	bc, (_camZ)
+	ld	a, (_camZ+3)
+	ld	hl, (ix - 49)
+	ld	de, (ix - 52)
+	call	__fsub
+	push	bc
+	pop	hl
+	ld	e, a
+	call	__fmul
+	ld	(ix - 61), bc
+	ld	d, a
+	lea	bc, iy
+	ld	a, (ix - 58)
+	lea	hl, iy
+	ld	e, a
+	call	__fmul
+	ld	hl, (ix - 61)
+	ld	e, d
+	call	__fadd
+	ld	hl, (ix - 33)
+	ld	e, (ix - 34)
+	call	__fcmp
+	jp	m, BB15_27
+	or	a, a
+	sbc	hl, hl
+	ld	l, (ix - 55)
+	dec	hl
+	ld	(ix - 55), hl
+	xor	a, a
+	sbc	hl, hl
+	push	hl
+	pop	bc
+	ld	iy, (ix - 46)
+BB15_19:
+	push	bc
+	pop	hl
+	ld	de, 6
+	or	a, a
+	sbc	hl, de
+	jp	z, BB15_25
+	add	iy, bc
+	bit	0, (iy)
+	jp	z, BB15_24
+	and	a, 1
+	bit	0, a
+	ld	de, (ix - 18)
+	ld	(ix - 58), bc
+	jr	nz, BB15_23
+	ld	hl, 65
+	push	hl
+	ld	hl, -7340032
+	push	hl
+	ld	hl, (ix - 52)
+	push	hl
+	ld	hl, (ix - 49)
+	push	hl
+	ld	hl, (ix - 67)
+	push	hl
+	ld	hl, (ix - 64)
+	push	hl
+	ld	hl, (ix - 43)
+	push	hl
+	ld	hl, (ix - 40)
+	push	hl
+	call	_cubeInView
+	ld	bc, (ix - 58)
+	ld	de, (ix - 18)
+	ld	hl, 24
+	add	hl, sp
+	ld	sp, hl
+	bit	0, a
+	jp	z, BB15_16
+BB15_23:
+	ld	hl, (ix - 21)
+	push	hl
+	push	de
+	ld	hl, (ix - 6)
+	push	hl
+	ld	hl, (ix - 55)
+	push	hl
+	push	bc
+	ld	hl, 65
+	push	hl
+	ld	hl, -7340032
+	push	hl
+	ld	hl, (ix - 52)
+	push	hl
+	ld	hl, (ix - 49)
+	push	hl
+	ld	hl, (ix - 67)
+	push	hl
+	ld	hl, (ix - 64)
+	push	hl
+	ld	hl, (ix - 43)
+	push	hl
+	ld	hl, (ix - 40)
+	push	hl
+	call	_drawCubeFace
+	ld	bc, (ix - 58)
+	ld	hl, 39
+	add	hl, sp
+	ld	sp, hl
+	ld	a, 1
+BB15_24:
+	ld	iy, (ix - 46)
+	inc	bc
+	jp	BB15_19
+BB15_25:
+	and	a, 1
+	bit	0, a
+	ld	de, (ix - 18)
+	jp	z, BB15_16
+	ld	hl, (ix - 27)
+	inc	hl
+	ld	(ix - 27), hl
+BB15_27:
+	ld	iy, (ix - 21)
+BB15_28:
+	inc	iy
+	ld	(ix - 21), iy
+	ld	bc, (_renderDistance)
+	ld	iy, (ix - 3)
+	lea	iy, iy + 6
+	ld	(ix - 3), iy
+	ld	iy, (ix - 12)
+	ld	de, (ix - 15)
+	jp	BB15_9
+BB15_29:
+	push	bc
+	pop	hl
+	ld	de, (ix - 6)
+BB15_30:
+	ld	(ix - 18), bc
+	inc	de
+	ld	(ix - 6), de
+	ld	de, 1536
+	add	iy, de
+	ld	(ix - 12), iy
+	ld	bc, (ix - 9)
+	jp	BB15_5
+BB15_31:
+	ld	hl, 220
+	push	hl
+	ld	hl, 2
+	push	hl
+	call	_gfx_SetTextXY
+	pop	hl
+	pop	hl
+	or	a, a
+	sbc	hl, hl
+	push	hl
+	call	_gfx_SetTextFGColor
+	pop	hl
+	ld	hl, _.str.11
+	push	hl
+	call	_gfx_PrintString
+	pop	hl
+	ld	hl, 3
+	push	hl
+	ld	hl, (ix - 27)
+	push	hl
+	call	_gfx_PrintInt
+	pop	hl
+	pop	hl
+	ld	hl, _drawWorld.frameCounter
+	inc	(hl)
+	ld	d, (hl)
+	ld	hl, (-851900)
+	ld	a, (-851897)
+	ld	e, a
+	ld	bc, (_drawWorld.lastTime)
+	ld	a, (_drawWorld.lastTime+3)
+	call	__lcmpu
+	jr	z, BB15_33
+	ld	(_drawWorld.lastTime), hl
+	ld	a, e
+	ld	(_drawWorld.lastTime+3), a
+	ld	a, d
+	ld	(_drawWorld.fps), a
+	xor	a, a
+	ld	(_drawWorld.frameCounter), a
+BB15_33:
+	ld	hl, 2
+	push	hl
+	push	hl
+	call	_gfx_SetTextXY
+	pop	hl
+	pop	hl
+	ld	hl, _.str.1
+	push	hl
+	call	_gfx_PrintString
+	pop	hl
+	ld	a, (_drawWorld.fps)
+	or	a, a
+	sbc	hl, hl
+	ld	l, a
+	ld	de, 2
+	push	de
+	push	hl
+	call	_gfx_PrintInt
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_load_texture_appvar
+_load_texture_appvar:
+	ld	hl, -18
+	call	__frameset
+	ld	hl, _.str.16
+	ld	de, _.str.1.17
+	push	de
+	push	hl
+	call	_ti_Open
+	ld	e, a
+	pop	hl
+	pop	hl
+	or	a, a
+	jp	z, BB16_9
+	ld	hl, 2
+	ld	bc, _texture_colors
+	ld	(ix - 3), bc
+	push	de
+	ld	bc, 0
+	push	bc
+	push	hl
+	ld	(ix - 9), de
+	call	_ti_Seek
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	de, 4
+	ld	bc, 0
+	push	bc
+	pop	hl
+BB16_2:
+	ld	(ix - 12), hl
+	or	a, a
+	sbc	hl, de
+	ld	hl, (ix - 3)
+	ld	(ix - 6), hl
+	push	bc
+	pop	hl
+	jr	z, BB16_8
+BB16_3:
+	ld	(ix - 15), hl
+	ld	de, 6
+	or	a, a
+	sbc	hl, de
+	push	bc
+	pop	de
+	jr	z, BB16_7
+BB16_4:
+	ld	(ix - 18), de
+	ex	de, hl
+	ld	de, 2
+	or	a, a
+	sbc	hl, de
+	jr	z, BB16_6
+	ld	hl, (ix - 9)
+	push	hl
+	call	_ti_GetC
+	ld	bc, 0
+	pop	de
+	ld	a, l
+	ld	iy, (ix - 6)
+	ld	de, (ix - 18)
+	add	iy, de
+	ld	(iy), a
+	inc	de
+	jr	BB16_4
+BB16_6:
+	ld	hl, (ix - 15)
+	inc	hl
+	ld	iy, (ix - 6)
+	lea	iy, iy + 2
+	ld	(ix - 6), iy
+	jr	BB16_3
+BB16_7:
+	ld	hl, (ix - 12)
+	inc	hl
+	ld	iy, (ix - 3)
+	lea	iy, iy + 12
+	ld	(ix - 3), iy
+	ld	de, 4
+	jr	BB16_2
+BB16_8:
+	ld	hl, (ix - 9)
+	push	hl
+	call	_ti_Close
+	ld	de, (ix - 9)
+	pop	hl
+BB16_9:
+	ld	a, e
+	or	a, a
+	jr	nz, BB16_11
+	ld	a, 0
+	jr	BB16_12
+BB16_11:
+	ld	a, -1
+BB16_12:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_initWorld
+_initWorld:
+	ld	hl, -36
+	call	__frameset
+	ld	hl, (ix + 6)
+	ld	de, 0
+	ld	bc, _world
+	ld	(_worldSeed), hl
+	ld	hl, 16
+	ld	(ix - 6), bc
+	push	hl
+	pop	bc
+BB17_1:
+	push	de
+	pop	hl
+	or	a, a
+	sbc	hl, bc
+	jp	z, BB17_18
+	ld	iy, (_worldSeed)
+	lea	hl, iy
+	ld	bc, 131
+	call	__imulu
+	ld	(ix - 9), de
+	add	hl, de
+	xor	a, a
+	push	hl
+	pop	bc
+	call	__ultof
+	or	a, a
+	sbc	hl, hl
+	ld	e, 65
+	call	__fmul
+	ld	de, 0
+	ld	(ix - 18), bc
+	ld	l, a
+	ld	(ix - 21), hl
+	lea	hl, iy
+	ld	bc, 17
+	call	__imulu
+	dec	bc
+	ld	(ix - 24), hl
+	ld	hl, (ix - 6)
+	ld	(ix - 12), hl
+	ld	(ix - 3), de
+BB17_3:
+	ld	hl, (ix - 3)
+	or	a, a
+	sbc	hl, bc
+	jp	z, BB17_17
+	ld	hl, (ix - 24)
+	ld	bc, (ix - 3)
+	add	hl, bc
+	xor	a, a
+	push	hl
+	pop	bc
+	call	__ultof
+	ex	de, hl
+	ld	e, 65
+	call	__fmul
+	ld	l, a
+	ld	de, 63
+	push	de
+	ld	de, 0
+	push	de
+	ld	de, 4
+	push	de
+	push	hl
+	push	bc
+	ld	hl, (ix - 21)
+	push	hl
+	ld	hl, (ix - 18)
+	push	hl
+	call	_fbmNoise2D
+	push	hl
+	pop	bc
+	ld	a, e
+	ld	hl, 21
+	add	hl, sp
+	ld	sp, hl
+	ld	iy, -8388608
+	lea	hl, iy
+	ld	e, 63
+	call	__fadd
+	or	a, a
+	sbc	hl, hl
+	call	__fmul
+	ld	l, a
+	ld	de, 63
+	push	de
+	push	iy
+	push	hl
+	push	bc
+	call	_fminf
+	pop	bc
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	bc, 0
+	push	bc
+	push	bc
+	push	de
+	push	hl
+	call	_fmaxf
+	push	hl
+	pop	bc
+	ld	a, e
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 4194304
+	ld	e, 65
+	call	__fmul
+	call	__ftol
+	push	bc
+	pop	iy
+	lea	hl, iy
+	ld	de, 13
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	m, BB17_6
+	ld	iy, 13
+BB17_6:
+	lea	hl, iy
+	ld	de, 2
+	add	hl, de
+	ld	(ix - 27), hl
+	lea	de, iy
+	inc	de
+	ld	bc, -2
+	add	iy, bc
+	ld	(ix - 33), iy
+	ld	hl, (ix - 9)
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _world
+	add	iy, bc
+	ld	(ix - 30), de
+	ex	de, hl
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	de, (ix - 3)
+	add	iy, de
+	ld	(ix - 36), iy
+	ld	hl, (ix - 12)
+	ld	(ix - 15), hl
+	ld	bc, 0
+BB17_7:
+	push	bc
+	pop	hl
+	ld	de, 16
+	or	a, a
+	sbc	hl, de
+	jr	z, BB17_16
+	push	bc
+	pop	hl
+	ld	de, (ix - 27)
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	p, BB17_11
+	ld	hl, (ix - 30)
+	or	a, a
+	sbc	hl, bc
+	jr	nz, BB17_12
+	ld	hl, (ix - 36)
+	ld	(hl), 1
+	ld	iy, (ix - 15)
+	jr	BB17_15
+BB17_11:
+	ld	iy, (ix - 15)
+	ld	(iy), 0
+	jr	BB17_15
+BB17_12:
+	push	bc
+	pop	hl
+	ld	de, (ix - 33)
+	or	a, a
+	sbc	hl, de
+	call	pe, __setflag
+	jp	p, BB17_14
+	ld	iy, (ix - 15)
+	ld	(iy), 3
+	jr	BB17_15
+BB17_14:
+	ld	iy, (ix - 15)
+	ld	(iy), 2
+BB17_15:
+	inc	bc
+	lea	iy, iy + 16
+	ld	(ix - 15), iy
+	jr	BB17_7
+BB17_16:
+	ld	hl, (ix - 3)
+	inc	hl
+	ld	(ix - 3), hl
+	ld	hl, (ix - 12)
+	inc	hl
+	ld	(ix - 12), hl
+	ld	de, 0
+	ld	bc, 16
+	jp	BB17_3
+BB17_17:
+	ld	hl, 65
+	push	hl
+	call	_gfx_FillScreen
+	pop	hl
+	ld	hl, 116
+	push	hl
+	call	_gfx_SetTextFGColor
+	pop	hl
+	ld	hl, _.str.27
+	push	hl
+	call	_gfx_GetStringWidth
+	push	hl
+	pop	de
+	pop	hl
+	ld	hl, 320
+	or	a, a
+	sbc	hl, de
+	ld	bc, 2
+	call	__idivs
+	ld	de, 90
+	push	de
+	push	hl
+	call	_gfx_SetTextXY
+	pop	hl
+	pop	hl
+	ld	hl, _.str.27
+	push	hl
+	call	_gfx_PrintString
+	pop	hl
+	ld	hl, 116
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	hl, 12
+	push	hl
+	ld	hl, 222
+	push	hl
+	ld	hl, 119
+	push	hl
+	ld	hl, 49
+	push	hl
+	call	_gfx_FillRectangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 70
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	hl, (ix - 9)
+	ld	bc, 220
+	call	__imulu
+	ld	c, 4
+	call	__ishru
+	ld	de, 10
+	push	de
+	push	hl
+	ld	hl, 120
+	push	hl
+	ld	hl, 50
+	push	hl
+	call	_gfx_FillRectangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	call	_gfx_SwapDraw
+	ld	bc, 16
+	ld	iy, (ix - 9)
+	inc	iy
+	ld	de, 256
+	ld	hl, (ix - 6)
+	add	hl, de
+	lea	de, iy
+	ld	(ix - 6), hl
+	jp	BB17_1
+BB17_18:
+	ld	hl, 65
+	push	hl
+	call	_gfx_FillScreen
+	pop	hl
+	ld	hl, 116
+	push	hl
+	call	_gfx_SetTextFGColor
+	pop	hl
+	ld	hl, _.str.1.26
+	push	hl
+	call	_gfx_GetStringWidth
+	push	hl
+	pop	de
+	pop	hl
+	ld	hl, 320
+	or	a, a
+	sbc	hl, de
+	ld	bc, 2
+	call	__idivs
+	ld	de, 90
+	push	de
+	push	hl
+	call	_gfx_SetTextXY
+	pop	hl
+	pop	hl
+	ld	hl, _.str.1.26
+	push	hl
+	call	_gfx_PrintString
+	pop	hl
+	ld	hl, 116
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	hl, 12
+	push	hl
+	ld	hl, 222
+	push	hl
+	ld	hl, 119
+	push	hl
+	ld	hl, 49
+	push	hl
+	call	_gfx_FillRectangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	ld	hl, 70
+	push	hl
+	call	_gfx_SetColor
+	pop	hl
+	ld	hl, 10
+	push	hl
+	ld	hl, 220
+	push	hl
+	ld	hl, 120
+	push	hl
+	ld	hl, 50
+	push	hl
+	call	_gfx_FillRectangle
+	pop	hl
+	pop	hl
+	pop	hl
+	pop	hl
+	call	_gfx_SwapDraw
+	ld	sp, ix
+	pop	ix
+	jp	_generateFaceVisibility
+	section	.text,"ax",@progbits
+
+	section	.text,"ax",@progbits
+	public	_generateFaceVisibility
+_generateFaceVisibility:
+	ld	hl, -35
+	call	__frameset
+	ld	bc, 0
+	ld	hl, _faceVisible
+	ld	de, 16
+	push	hl
+	pop	iy
+BB18_1:
+	push	bc
+	pop	hl
+	or	a, a
+	sbc	hl, de
+	jp	z, BB18_35
+	push	bc
+	pop	hl
+	dec	hl
+	ld	(ix - 27), hl
+	ld	(ix - 3), bc
+	inc	bc
+	ld	(ix - 18), bc
+	ld	(ix - 12), iy
+	or	a, a
+	sbc	hl, hl
+BB18_3:
+	push	hl
+	pop	bc
+	ld	de, 16
+	or	a, a
+	sbc	hl, de
+	jp	z, BB18_34
+	ld	(ix - 24), iy
+	push	bc
+	pop	hl
+	dec	hl
+	ld	(ix - 30), hl
+	ld	(ix - 6), bc
+	inc	bc
+	ld	(ix - 21), bc
+	ld	iy, (ix - 12)
+	or	a, a
+	sbc	hl, hl
+BB18_5:
+	push	hl
+	pop	bc
+	ld	de, 16
+	or	a, a
+	sbc	hl, de
+	jp	z, BB18_33
+	ld	(ix - 15), iy
+	ld	hl, (ix - 3)
+	ld	e, 8
+	ld	(ix - 9), bc
+	ld	c, e
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _world
+	add	iy, bc
+	ld	hl, (ix - 6)
+	ld	d, 4
+	ld	c, d
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	de, (ix - 9)
+	add	iy, de
+	ld	a, (iy)
+	or	a, a
+	jr	nz, BB18_10
+	ld	hl, (ix - 3)
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _anyFaceVisible
+	add	iy, bc
+	ld	hl, (ix - 6)
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	add	iy, de
+	ld	(iy), 0
+	ld	bc, 0
+BB18_8:
+	push	bc
+	pop	hl
+	ld	de, 6
+	or	a, a
+	sbc	hl, de
+	ld	iy, (ix - 15)
+	ld	hl, (ix - 9)
+	jp	z, BB18_32
+	add	iy, bc
+	ld	(iy), 0
+	inc	bc
+	jr	BB18_8
+BB18_10:
+	ld	hl, (ix - 3)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	jr	z, BB18_13
+	ld	hl, (ix - 27)
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _world
+	add	iy, bc
+	ld	hl, (ix - 6)
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	add	iy, de
+	ld	a, (iy)
+	or	a, a
+	ld	a, -1
+	jr	z, BB18_13
+	ld	a, 0
+BB18_13:
+	ld	hl, (ix - 3)
+	ld	bc, 1536
+	call	__imulu
+	push	hl
+	pop	bc
+	ld	iy, _faceVisible
+	add	iy, bc
+	ld	hl, (ix - 6)
+	ld	bc, 96
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ex	de, hl
+	ld	bc, 6
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	(ix - 31), a
+	and	a, 1
+	ld	(iy), a
+	ld	hl, (ix - 3)
+	ld	bc, 15
+	or	a, a
+	sbc	hl, bc
+	ld	a, 1
+	jr	z, BB18_16
+	ld	hl, (ix - 18)
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _world
+	add	iy, bc
+	ld	hl, (ix - 6)
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	de, (ix - 9)
+	add	iy, de
+	ld	a, (iy)
+	or	a, a
+	ld	a, -1
+	jr	z, BB18_16
+	ld	a, 0
+BB18_16:
+	ld	hl, (ix - 3)
+	ld	bc, 1536
+	call	__imulu
+	push	hl
+	pop	bc
+	ld	iy, _faceVisible
+	add	iy, bc
+	ld	de, (ix - 6)
+	push	de
+	pop	hl
+	ld	bc, 96
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	hl, (ix - 9)
+	ld	bc, 6
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	(ix - 32), a
+	and	a, 1
+	ld	(iy + 1), a
+	ex	de, hl
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	de, (ix - 3)
+	ld	a, 1
+	jr	z, BB18_19
+	ex	de, hl
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _world
+	add	iy, bc
+	ld	hl, (ix - 30)
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	de, (ix - 9)
+	add	iy, de
+	ld	a, (iy)
+	or	a, a
+	ld	a, -1
+	jr	z, BB18_19
+	ld	a, 0
+BB18_19:
+	ld	hl, (ix - 3)
+	ld	bc, 1536
+	call	__imulu
+	push	hl
+	pop	bc
+	ld	iy, _faceVisible
+	add	iy, bc
+	ld	de, (ix - 6)
+	push	de
+	pop	hl
+	ld	bc, 96
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	hl, (ix - 9)
+	ld	bc, 6
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	(ix - 33), a
+	and	a, 1
+	ld	(iy + 2), a
+	push	de
+	pop	hl
+	ld	bc, 15
+	or	a, a
+	sbc	hl, bc
+	ld	hl, (ix - 3)
+	ld	a, 1
+	jr	z, BB18_23
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _world
+	add	iy, bc
+	ld	hl, (ix - 21)
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	de, (ix - 9)
+	add	iy, de
+	ld	a, (iy)
+	or	a, a
+	ld	a, -1
+	jr	z, BB18_22
+	ld	a, 0
+BB18_22:
+	ld	de, (ix - 6)
+BB18_23:
+	ld	hl, (ix - 3)
+	ld	bc, 1536
+	call	__imulu
+	push	hl
+	pop	bc
+	ld	iy, _faceVisible
+	add	iy, bc
+	ex	de, hl
+	ld	bc, 96
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	de, (ix - 9)
+	push	de
+	pop	hl
+	ld	bc, 6
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	(ix - 34), a
+	and	a, 1
+	ld	(iy + 3), a
+	ex	de, hl
+	ld	de, (ix - 6)
+	add	hl, bc
+	or	a, a
+	sbc	hl, bc
+	ld	hl, (ix - 3)
+	ld	a, 1
+	jr	z, BB18_27
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _world
+	add	iy, bc
+	ex	de, hl
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	de, (ix - 9)
+	add	iy, de
+	ld	a, (iy - 1)
+	or	a, a
+	ld	a, -1
+	jr	z, BB18_26
+	ld	a, 0
+BB18_26:
+	ld	de, (ix - 6)
+BB18_27:
+	ld	hl, (ix - 3)
+	ld	bc, 1536
+	call	__imulu
+	push	hl
+	pop	bc
+	ld	iy, _faceVisible
+	add	iy, bc
+	ex	de, hl
+	ld	bc, 96
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	de, (ix - 9)
+	push	de
+	pop	hl
+	ld	bc, 6
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	(ix - 35), a
+	and	a, 1
+	ld	(iy + 4), a
+	ex	de, hl
+	ld	bc, 15
+	or	a, a
+	sbc	hl, bc
+	ld	de, (ix - 3)
+	ld	a, 1
+	jr	z, BB18_31
+	ex	de, hl
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _world
+	add	iy, bc
+	ld	hl, (ix - 6)
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	de, (ix - 9)
+	add	iy, de
+	ld	a, (iy + 1)
+	or	a, a
+	ld	a, -1
+	jr	z, BB18_30
+	ld	a, 0
+BB18_30:
+	ld	de, (ix - 3)
+BB18_31:
+	ex	de, hl
+	ld	bc, 1536
+	call	__imulu
+	push	hl
+	pop	bc
+	ld	iy, _faceVisible
+	add	iy, bc
+	ld	hl, (ix - 6)
+	ld	bc, 96
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	de, (ix - 9)
+	push	de
+	pop	hl
+	ld	bc, 6
+	call	__imulu
+	push	hl
+	pop	bc
+	add	iy, bc
+	ld	l, a
+	and	a, 1
+	ld	(iy + 5), a
+	ld	a, (ix - 31)
+	or	a, (ix - 32)
+	or	a, (ix - 33)
+	or	a, (ix - 34)
+	or	a, (ix - 35)
+	or	a, l
+	ld	hl, (ix - 3)
+	ld	c, 8
+	call	__ishl
+	push	hl
+	pop	bc
+	ld	iy, _anyFaceVisible
+	add	iy, bc
+	ld	hl, (ix - 6)
+	ld	c, 4
+	call	__ishl
+	push	hl
+	pop	bc
+	add	iy, bc
+	add	iy, de
+	and	a, 1
+	ld	(iy), a
+	ld	iy, (ix - 15)
+	ex	de, hl
+BB18_32:
+	inc	hl
+	lea	iy, iy + 6
+	jp	BB18_5
+BB18_33:
+	ld	iy, (ix - 12)
+	lea	iy, iy + 96
+	ld	(ix - 12), iy
+	ld	hl, (ix - 21)
+	ld	iy, (ix - 24)
+	jp	BB18_3
+BB18_34:
+	ld	de, 1536
+	add	iy, de
+	ld	bc, (ix - 18)
+	ld	de, 16
+	jp	BB18_1
+BB18_35:
+	ld	sp, ix
+	pop	ix
+	ret
+	section	.text,"ax",@progbits
+
+	section	.rodata,"a",@progbits
+	private	_.str
+_.str:
+	db	"Enter Seed:", 0
+
+	section	.data,"aw",@progbits
+	public	_cameraFOVDegrees
+_cameraFOVDegrees:
+	dd	0x42b40000
+
+	section	.bss,"aw",@nobits
+	public	_cursorBlockValid
+_cursorBlockValid:
+	rb	1
+
+	section	.data,"aw",@progbits
+	public	_closestCursorDot
+_closestCursorDot:
+	dd	0xbf800000
+
+	section	.bss,"aw",@nobits
+	public	_rotX
+_rotX:
+	rb	4
+
+	section	.bss,"aw",@nobits
+	private	_sinRotX
+_sinRotX:
+	rb	4
+
+	section	.bss,"aw",@nobits
+	private	_cosRotX
+_cosRotX:
+	rb	4
+
+	section	.bss,"aw",@nobits
+	public	_rotY
+_rotY:
+	rb	4
+
+	section	.bss,"aw",@nobits
+	private	_sinRotY
+_sinRotY:
+	rb	4
+
+	section	.bss,"aw",@nobits
+	private	_cosRotY
+_cosRotY:
+	rb	4
+
+	section	.bss,"aw",@nobits
+	public	_camX
+_camX:
+	rb	4
+
+	section	.bss,"aw",@nobits
+	public	_camY
+_camY:
+	rb	4
+
+	section	.data,"aw",@progbits
+	public	_camZ
+_camZ:
+	dd	0xc0a00000
+
+	section	.bss,"aw",@nobits
+	public	_playerFOV
+_playerFOV:
+	rb	4
+
+	section	.rodata,"a",@progbits
+	private	___const.drawCubeFace.indices
+___const.drawCubeFace.indices:
+	dl	0
+	dl	3
+	dl	7
+	dl	4
+	dl	1
+	dl	2
+	dl	6
+	dl	5
+	dl	0
+	dl	1
+	dl	5
+	dl	4
+	dl	3
+	dl	2
+	dl	6
+	dl	7
+	dl	0
+	dl	1
+	dl	2
+	dl	3
+	dl	4
+	dl	5
+	dl	6
+	dl	7
+
+	section	.bss,"aw",@nobits
+	public	_cursorBlockX
+_cursorBlockX:
+	rb	3
+
+	section	.bss,"aw",@nobits
+	public	_cursorBlockY
+_cursorBlockY:
+	rb	3
+
+	section	.bss,"aw",@nobits
+	public	_cursorBlockZ
+_cursorBlockZ:
+	rb	3
+
+	section	.data,"aw",@progbits
+	public	_renderDistance
+_renderDistance:
+	dl	3
+
+	section	.bss,"aw",@nobits
+	private	_updateCursorTarget.cursorMissFrames
+_updateCursorTarget.cursorMissFrames:
+	rb	3
+
+	section	.rodata,"a",@progbits
+	private	_.str.11
+_.str.11:
+	db	"Cubes:", 0
+
+	section	.bss,"aw",@nobits
+	private	_drawWorld.lastTime
+_drawWorld.lastTime:
+	rb	4
+
+	section	.bss,"aw",@nobits
+	private	_drawWorld.frameCounter
+_drawWorld.frameCounter:
+	rb	1
+
+	section	.bss,"aw",@nobits
+	private	_drawWorld.fps
+_drawWorld.fps:
+	rb	1
+
+	section	.rodata,"a",@progbits
+	private	_.str.1
+_.str.1:
+	db	"FPS:", 0
+
+	section	.rodata,"a",@progbits
+	private	_.str.16
+_.str.16:
+	db	"BLOCKTILES", 0
+
+	section	.rodata,"a",@progbits
+	private	_.str.1.17
+_.str.1.17:
+	db	"r", 0
+
+	section	.bss,"aw",@nobits
+	public	_texture_colors
+_texture_colors:
+	rb	48
+
+	section	.data,"aw",@progbits
+	public	_worldSeed
+_worldSeed:
+	dl	42069
+
+	section	.bss,"aw",@nobits
+	public	_world
+_world:
+	rb	4096
+
+	section	.rodata,"a",@progbits
+	private	_.str.27
+_.str.27:
+	db	"Generating world...", 0
+
+	section	.rodata,"a",@progbits
+	private	_.str.1.26
+_.str.1.26:
+	db	"Generating Face Visibility...", 0
+
+	section	.bss,"aw",@nobits
+	public	_anyFaceVisible
+_anyFaceVisible:
+	rb	4096
+
+	section	.bss,"aw",@nobits
+	public	_faceVisible
+_faceVisible:
+	rb	24576
+
+	ident	"clang version 15.0.0 (https://github.com/CE-Programming/llvm-project 23b78267b5d376b232475d0805a937e54b61e0d0)"
+	ident	"clang version 15.0.0 (https://github.com/CE-Programming/llvm-project 23b78267b5d376b232475d0805a937e54b61e0d0)"
+	ident	"clang version 15.0.0 (https://github.com/CE-Programming/llvm-project 23b78267b5d376b232475d0805a937e54b61e0d0)"
+	ident	"clang version 15.0.0 (https://github.com/CE-Programming/llvm-project 23b78267b5d376b232475d0805a937e54b61e0d0)"
+	ident	"clang version 15.0.0 (https://github.com/CE-Programming/llvm-project 23b78267b5d376b232475d0805a937e54b61e0d0)"
+	ident	"clang version 15.0.0 (https://github.com/CE-Programming/llvm-project 23b78267b5d376b232475d0805a937e54b61e0d0)"
+	extern	__Unwind_SjLj_Register
+	extern	_gfx_SetTextFGColor
+	extern	_gfx_Begin
+	extern	__fadd
+	extern	_ti_Close
+	extern	__sand
+	extern	_gfx_PrintString
+	extern	__ishl
+	extern	__ladd
+	extern	__ftol
+	extern	__idivu
+	extern	_gfx_FillTriangle
+	extern	_gfx_PrintInt
+	extern	__setflag
+	extern	__idivs
+	extern	__ixor
+	extern	_gfx_FillRectangle
+	extern	_ti_GetC
+	extern	_gfx_PrintUInt
+	extern	__ltof
+	extern	_sinf
+	extern	_ti_Open
+	extern	_cosf
+	extern	_sqrtf
+	extern	__fsub
+	extern	_fmaxf
+	extern	_tanf
+	extern	__frameset
+	extern	_kb_Scan
+	extern	_gfx_GetStringWidth
+	extern	_ti_Seek
+	extern	__ultof
+	extern	__ishru
+	extern	_gfx_SwapDraw
+	extern	__fmul
+	extern	_gfx_SetDraw
+	extern	_gfx_FillScreen
+	extern	__Unwind_SjLj_Unregister
+	extern	__fneg
+	extern	__fdiv
+	extern	__imulu
+	extern	_gfx_SetColor
+	extern	_fminf
+	extern	_gfx_End
+	extern	__lcmpu
+	extern	__fcmp
+	extern	_gfx_SetTextXY
+	extern	__frameset0

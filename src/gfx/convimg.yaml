@@ -1,0 +1,15 @@
+converts:
+  - name: BLOCKTILES
+    palette: xlibc
+    tilesets:
+      tile-width: 1
+      tile-height: 1
+      images:
+        - block_tiles.png
+    transparent-color-index: 0
+
+outputs:
+  - type: appvar
+    name: BLOCKTILES
+    converts:
+      - BLOCKTILES
