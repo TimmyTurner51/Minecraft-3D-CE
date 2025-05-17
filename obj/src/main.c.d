@@ -11,5 +11,5 @@ obj/src/main.c.bc: src\main.c C:\CEdev\include\tice.h \
   C:\CEdev\include\ti\screen.h C:\CEdev\include\ti\ui.h \
   C:\CEdev\include\ti\tokens.h C:\CEdev\include\ti\vars.h \
   C:\CEdev\include\keypadc.h C:\CEdev\include\graphx.h \
-  C:\CEdev\include\stdlib.h src\player.h src\world.h src\render.h \
-  src\texture.h
+  C:\CEdev\include\stdlib.h src\debug.h src\player.h src\world.h \
+  src\render.h src\texture.h src\pauseMenu.h

@@ -70,25 +70,25 @@ void updatePlayer(void) {
     if (kb_IsDown(kb_KeyMath)) {
         camY -= moveSpeed;
     }
+    updateTransformCache();
 }
 
 void setCameraSpawnAboveTerrain(void) {
-    // Pick a center position
-    int blockX = WORLD_WIDTH / 2;
-    int blockZ = WORLD_DEPTH / 2;
-    int blockY = 1; // default in case world is empty
+    int spawnX = WORLD_WIDTH / 2;
+    int spawnZ = WORLD_DEPTH / 2;
 
-    // Find the topmost solid block at (blockX, blockZ)
+    int topY = 0;
     for (int y = WORLD_HEIGHT - 1; y >= 0; y--) {
-        if (world[blockX][y][blockZ] != 0) {
-            blockY = y + 1; // one block above
+        if (world[spawnX][y][spawnZ] != 0) {
+            topY = y;
             break;
         }
     }
 
+    camX = spawnX * CUBE_SIZE + CUBE_SIZE / 2;
+    camY = (topY + 2) * CUBE_SIZE + CUBE_SIZE / 2.0f;
+    camZ = spawnZ * CUBE_SIZE + CUBE_SIZE / 2;
 
-    // Spawn camera at the center of the chosen block
-    camX = blockX * CUBE_SIZE + CUBE_SIZE / 2.0f;
-    camY = blockY * CUBE_SIZE + CUBE_SIZE / 2.0f;
-    camZ = blockZ * CUBE_SIZE + CUBE_SIZE / 2.0f;
+    rotX = 0.2f; // slight downward angle for debug
+    
 }

@@ -3,9 +3,9 @@ converts:
     palette: xlibc
     tilesets:
       tile-width: 1
-      tile-height: 1
+      tile-height: 12
       images:
-        - block_tiles.png
+        - block_tiles_reshaped.png
     transparent-color-index: 0
 
 outputs:

@@ -15,7 +15,7 @@
 #define FACE_BACK   4
 #define FACE_FRONT  5
 
-#define CUBE_SIZE 18.0f
+#define CUBE_SIZE 35.0f
 
 extern unsigned int worldSeed;
 extern bool faceVisible[WORLD_WIDTH][WORLD_HEIGHT][WORLD_DEPTH][6];

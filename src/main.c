@@ -2,10 +2,12 @@
 #include <keypadc.h>
 #include <graphx.h>
 #include <stdbool.h>
+#include "debug.h"
 #include "player.h"
 #include "world.h"
 #include "render.h"
 #include "texture.h"
+#include "pauseMenu.h"
 
 int main(void) {
     gfx_Begin();
@@ -29,7 +31,6 @@ int main(void) {
 
     while (true) {
         kb_Scan();
-
         if (kb_IsDown(kb_KeyClear)) return 0;
         if (kb_IsDown(kb_KeyEnter) || kb_IsDown(kb_Key2nd)) break;
 
@@ -67,12 +68,23 @@ int main(void) {
     initWorld(seed);
     initPlayer();
 
+    bool clearWasHeld = false;
     int frameCount = 0;
     while (true) {
+        debug_Toggle();
+        if (debugEnabled) {
+            debug_Update();
+            continue; // skip rendering
+        }
         kb_Scan();
-        if (kb_IsDown(kb_KeyClear)) break;
+        if (kb_IsDown(kb_KeyClear)) {
+            int result = runPauseMenu();
+            if (result == PAUSE_QUIT) return 0;
+        }
+
 
         updatePlayer();
+        updateFPS();
         if (++frameCount % 3 == 0) updateCursorTarget();
 
         drawSkybox();

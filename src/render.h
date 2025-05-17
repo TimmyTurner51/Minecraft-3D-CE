@@ -17,6 +17,7 @@
 #define SCREEN_WIDTH 320
 #define SCREEN_HEIGHT 240
 
+
 #define FAST_PROJECT(x, y, z, sx, sy)                             \
     do {                                                          \
         float iz = 1.0f / (z);                                     \
@@ -24,14 +25,22 @@
         sy = (int)(-y * iz * playerFOV + SCREEN_HEIGHT / 2);      \
     } while (0)
 
+void transform(float x, float y, float z, float *outX, float *outY, float *outZ);
+
+
+void updateTransformCache(void);
 void drawCubeFace(float cx, float cy, float cz, float size, int face, int tile_id, int blockX, int blockY, int blockZ);
 void drawWorld(void);
 bool cubeInView(float cx, float cy, float cz, float size);
-void transform(float *x, float *y, float *z);
 void drawSkybox(void);
 void updateCursorTarget(void);
 
 extern int cursorBlockX, cursorBlockY, cursorBlockZ;
+extern float closestCursorDot;
 extern bool cursorBlockValid;
+extern int currentFPS;
+extern int cursorBlockFace;
+
+void updateFPS(void);
 
 #endif
